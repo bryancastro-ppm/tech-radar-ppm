@@ -1,5 +1,6 @@
 'use client';
 
+import React, { memo } from 'react';
 import {
   Table,
   TableHeader,
@@ -33,7 +34,7 @@ const quadrantLabels: Record<Quadrant, string> = {
   'sin-categorizar': 'Sin Categorizar',
 };
 
-export function RadarTable({ entries }: RadarTableProps) {
+const RadarTable = memo(function RadarTable({ entries }: RadarTableProps) {
   return (
     <Table aria-label="Tabla de dependencias del Tech Radar">
       <TableHeader>
@@ -73,4 +74,6 @@ export function RadarTable({ entries }: RadarTableProps) {
       </TableBody>
     </Table>
   );
-}
+});
+
+export { RadarTable };

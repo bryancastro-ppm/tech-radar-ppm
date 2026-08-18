@@ -1,5 +1,6 @@
 'use client';
 
+import React, { memo } from 'react';
 import { Chip as HeroUIChip } from '@heroui/react';
 import type { ChipProps as HeroUIChipProps } from '@heroui/react';
 import type { Quadrant } from '@/radar/domain/value-objects/Quadrant';
@@ -19,7 +20,7 @@ const colorMap: Record<Quadrant, HeroUIChipProps['color']> = {
   'sin-categorizar': 'default',
 };
 
-export function Chip({
+const Chip = memo(function Chip({
   quadrant,
   isSelected = false,
   className,
@@ -33,4 +34,6 @@ export function Chip({
       {...props}
     />
   );
-}
+});
+
+export { Chip };

@@ -1,5 +1,6 @@
 'use client';
 
+import React, { memo } from 'react';
 import type { Ring } from '@/radar/domain/value-objects/Ring';
 
 interface RingLegendItemProps {
@@ -14,11 +15,13 @@ const ringColors: Record<Ring, string> = {
   hold: 'bg-danger-500',
 };
 
-export function RingLegendItem({ ring, label }: RingLegendItemProps) {
+const RingLegendItem = memo(function RingLegendItem({ ring, label }: RingLegendItemProps) {
   return (
     <div className="flex items-center gap-2">
       <span className={`w-3 h-3 rounded-full ${ringColors[ring]}`} />
       <span className="text-sm text-default-600 capitalize">{label}</span>
     </div>
   );
-}
+});
+
+export { RingLegendItem };

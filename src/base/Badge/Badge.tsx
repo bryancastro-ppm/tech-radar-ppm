@@ -1,5 +1,6 @@
 'use client';
 
+import React, { memo } from 'react';
 import { Badge as HeroUIBadge } from '@heroui/react';
 import type { BadgeProps as HeroUIBadgeProps } from '@heroui/react';
 import type { Ring } from '@/radar/domain/value-objects/Ring';
@@ -16,7 +17,7 @@ const colorMap: Record<Ring, HeroUIBadgeProps['color']> = {
   hold: 'danger',
 };
 
-export function Badge({ ring = 'adopt', className, ...props }: BadgeProps) {
+const Badge = memo(function Badge({ ring = 'adopt', className, ...props }: BadgeProps) {
   return (
     <HeroUIBadge
       color={colorMap[ring]}
@@ -24,4 +25,6 @@ export function Badge({ ring = 'adopt', className, ...props }: BadgeProps) {
       {...props}
     />
   );
-}
+});
+
+export { Badge };

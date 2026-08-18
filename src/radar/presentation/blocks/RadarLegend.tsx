@@ -1,5 +1,6 @@
 'use client';
 
+import React, { memo } from 'react';
 import { RingLegendItem } from '../elements/RingLegendItem';
 import { RINGS } from '@/radar/domain/value-objects/Ring';
 
@@ -10,7 +11,7 @@ const ringLabels: Record<string, string> = {
   hold: 'Hold - Evitar uso',
 };
 
-export function RadarLegend() {
+const RadarLegend = memo(function RadarLegend() {
   return (
     <div className="flex flex-col gap-2 p-4 bg-default-50 rounded-lg">
       <h3 className="text-sm font-semibold text-default-700 mb-2">Leyenda</h3>
@@ -19,4 +20,6 @@ export function RadarLegend() {
       ))}
     </div>
   );
-}
+});
+
+export { RadarLegend };

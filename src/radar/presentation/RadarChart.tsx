@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import React, { memo, useState, useMemo, useCallback } from 'react';
 import { Tooltip } from '@heroui/react';
 import type { RadarEntry } from '@/radar/domain/entities/RadarEntry';
 import { calculateBlipPosition } from '@/radar/domain/services/calculateBlipPosition';
@@ -37,20 +37,31 @@ const quadrantColors: Record<Quadrant, string> = {
 };
 
 const ringRadii = [0.25, 0.5, 0.75, 1];
+const quadrantAngles = [0, 72, 144, 216, 288];
 
-export function RadarChart({ entries }: RadarChartProps) {
+const RadarChart = memo(function RadarChart({ entries }: RadarChartProps) {
   const [hoveredEntry, setHoveredEntry] = useState<RadarEntry | null>(null);
 
-  const groupedByQuadrant = entries.reduce(
-    (acc, entry) => {
-      if (!acc[entry.quadrant]) {
-        acc[entry.quadrant] = [];
-      }
-      acc[entry.quadrant].push(entry);
-      return acc;
-    },
-    {} as Record<Quadrant, RadarEntry[]>,
-  );
+  const groupedByQuadrant = useMemo(() => {
+    return entries.reduce(
+      (acc, entry) => {
+        if (!acc[entry.quadrant]) {
+          acc[entry.quadrant] = [];
+        }
+        acc[entry.quadrant].push(entry);
+        return acc;
+      },
+      {} as Record<Quadrant, RadarEntry[]>,
+    );
+  }, [entries]);
+
+  const handleMouseEnter = useCallback((entry: RadarEntry) => {
+    setHoveredEntry(entry);
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    setHoveredEntry(null);
+  }, []);
 
   return (
     <div className="relative w-full max-w-2xl mx-auto">
@@ -61,14 +72,14 @@ export function RadarChart({ entries }: RadarChartProps) {
               cx={50}
               cy={50}
               r={r * 45}
-              className="fill-none stroke-default-200"
+              className="fill-none stroke-gray-200"
               strokeWidth={0.3}
             />
             <text
               x={50}
               y={50 - r * 45 + 3}
               textAnchor="middle"
-              className="fill-default-400"
+              className="fill-gray-400"
               fontSize={2}
             >
               {ringLabels[RINGS[index]]}
@@ -76,14 +87,14 @@ export function RadarChart({ entries }: RadarChartProps) {
           </g>
         ))}
 
-        {[0, 72, 144, 216, 288].map((angle) => (
+        {quadrantAngles.map((angle) => (
           <line
             key={angle}
             x1={50}
             y1={50}
             x2={50 + 45 * Math.cos((angle * Math.PI) / 180)}
             y2={50 + 45 * Math.sin((angle * Math.PI) / 180)}
-            className="stroke-default-200"
+            className="stroke-gray-200"
             strokeWidth={0.2}
           />
         ))}
@@ -104,7 +115,7 @@ export function RadarChart({ entries }: RadarChartProps) {
               content={
                 <div className="p-2">
                   <p className="font-semibold">{entry.name}</p>
-                  <p className="text-xs text-default-500">v{entry.version}</p>
+                  <p className="text-xs text-gray-500">v{entry.version}</p>
                   <p className="text-xs">{quadrantLabels[entry.quadrant]}</p>
                   <p className="text-xs">{entry.product}</p>
                 </div>
@@ -116,8 +127,8 @@ export function RadarChart({ entries }: RadarChartProps) {
                 r={1.2}
                 fill={quadrantColors[entry.quadrant]}
                 className="cursor-pointer hover:opacity-80 transition-opacity"
-                onMouseEnter={() => setHoveredEntry(entry)}
-                onMouseLeave={() => setHoveredEntry(null)}
+                onMouseEnter={() => handleMouseEnter(entry)}
+                onMouseLeave={handleMouseLeave}
               />
             </Tooltip>
           );
@@ -125,13 +136,15 @@ export function RadarChart({ entries }: RadarChartProps) {
       </svg>
 
       {hoveredEntry && (
-        <div className="absolute bottom-4 left-4 bg-white dark:bg-default-100 p-3 rounded-lg shadow-lg border border-default-200">
+        <div className="absolute bottom-4 left-4 bg-white p-3 rounded-lg shadow-lg border border-gray-200">
           <p className="font-semibold">{hoveredEntry.name}</p>
-          <p className="text-sm text-default-500">v{hoveredEntry.version}</p>
+          <p className="text-sm text-gray-500">v{hoveredEntry.version}</p>
           <p className="text-sm">{quadrantLabels[hoveredEntry.quadrant]}</p>
-          <p className="text-sm text-default-400">{hoveredEntry.product}</p>
+          <p className="text-sm text-gray-400">{hoveredEntry.product}</p>
         </div>
       )}
     </div>
   );
-}
+});
+
+export { RadarChart };

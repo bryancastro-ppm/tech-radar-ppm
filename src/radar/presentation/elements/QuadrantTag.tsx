@@ -1,5 +1,6 @@
 'use client';
 
+import React, { memo } from 'react';
 import { Chip } from '@/base/Chip';
 import type { Quadrant } from '@/radar/domain/value-objects/Quadrant';
 
@@ -18,7 +19,7 @@ const quadrantLabels: Record<Quadrant, string> = {
   'sin-categorizar': 'Sin Categorizar',
 };
 
-export function QuadrantTag({ quadrant, onClick, isSelected }: QuadrantTagProps) {
+const QuadrantTag = memo(function QuadrantTag({ quadrant, onClick, isSelected }: QuadrantTagProps) {
   return (
     <Chip
       quadrant={quadrant}
@@ -29,4 +30,6 @@ export function QuadrantTag({ quadrant, onClick, isSelected }: QuadrantTagProps)
       {quadrantLabels[quadrant]}
     </Chip>
   );
-}
+});
+
+export { QuadrantTag };

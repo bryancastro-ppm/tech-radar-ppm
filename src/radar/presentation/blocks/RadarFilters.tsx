@@ -1,8 +1,9 @@
 'use client';
 
+import React, { memo, useCallback } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useCallback } from 'react';
 import { Select, SelectItem } from '@heroui/react';
+import type { SharedSelection } from '@heroui/react';
 import { QUADRANTS, type Quadrant } from '@/radar/domain/value-objects/Quadrant';
 import { PRODUCTS } from '@/radar/domain/entities/Product';
 
@@ -15,7 +16,7 @@ const quadrantLabels: Record<Quadrant, string> = {
   'sin-categorizar': 'Sin Categorizar',
 };
 
-export function RadarFilters() {
+const RadarFilters = memo(function RadarFilters() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -35,16 +36,35 @@ export function RadarFilters() {
     [router, searchParams],
   );
 
+  const handleQuadrantChange = useCallback(
+    (keys: SharedSelection) => {
+      if (keys === 'all') return;
+      const value = Array.from(keys)[0] as string;
+      updateFilter('quadrant', value || '');
+    },
+    [updateFilter],
+  );
+
+  const handleProductChange = useCallback(
+    (keys: SharedSelection) => {
+      if (keys === 'all') return;
+      const value = Array.from(keys)[0] as string;
+      updateFilter('product', value || '');
+    },
+    [updateFilter],
+  );
+
+  const handleClearFilters = useCallback(() => {
+    router.push('/');
+  }, [router]);
+
   return (
     <div className="flex flex-wrap gap-4 mb-6">
       <Select
         label="Cuadrante"
         placeholder="Todos los cuadrantes"
         selectedKeys={currentQuadrant ? [currentQuadrant] : []}
-        onSelectionChange={(keys) => {
-          const value = Array.from(keys)[0] as string;
-          updateFilter('quadrant', value || '');
-        }}
+        onSelectionChange={handleQuadrantChange}
         className="max-w-xs"
       >
         {[...QUADRANTS, 'sin-categorizar' as const].map((quadrant) => (
@@ -58,10 +78,7 @@ export function RadarFilters() {
         label="Producto"
         placeholder="Todos los productos"
         selectedKeys={currentProduct ? [currentProduct] : []}
-        onSelectionChange={(keys) => {
-          const value = Array.from(keys)[0] as string;
-          updateFilter('product', value || '');
-        }}
+        onSelectionChange={handleProductChange}
         className="max-w-xs"
       >
         {PRODUCTS.map((product) => (
@@ -73,7 +90,7 @@ export function RadarFilters() {
 
       {(currentQuadrant || currentProduct) && (
         <button
-          onClick={() => router.push('/')}
+          onClick={handleClearFilters}
           className="self-end px-4 py-2 text-sm text-primary hover:text-primary-600 transition-colors"
         >
           Limpiar filtros
@@ -81,4 +98,6 @@ export function RadarFilters() {
       )}
     </div>
   );
-}
+});
+
+export { RadarFilters };
