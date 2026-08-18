@@ -1,0 +1,119 @@
+[
+  {
+    "name": "react",
+    "version": "18.3.0",
+    "quadrant": "frameworks-librerias",
+    "ring": "adopt",
+    "product": "membresias-backoffice",
+    "repository": "membresias-backoffice",
+    "isNew": false
+  },
+  {
+    "name": "react-dom",
+    "version": "18.3.0",
+    "quadrant": "frameworks-librerias",
+    "ring": "adopt",
+    "product": "membresias-backoffice",
+    "repository": "membresias-backoffice",
+    "isNew": false
+  },
+  {
+    "name": "next",
+    "version": "14.2.0",
+    "quadrant": "frameworks-librerias",
+    "ring": "adopt",
+    "product": "membresias-backoffice",
+    "repository": "membresias-backoffice",
+    "isNew": false
+  },
+  {
+    "name": "@heroui/react",
+    "version": "2.6.14",
+    "quadrant": "frameworks-librerias",
+    "ring": "adopt",
+    "product": "membresias-backoffice",
+    "repository": "membresias-backoffice",
+    "isNew": false
+  },
+  {
+    "name": "axios",
+    "version": "1.7.0",
+    "quadrant": "frameworks-librerias",
+    "ring": "adopt",
+    "product": "membresias-backoffice",
+    "repository": "membresias-backoffice",
+    "isNew": false
+  },
+  {
+    "name": "@reduxjs/toolkit",
+    "version": "2.3.0",
+    "quadrant": "gestion-de-estado",
+    "ring": "adopt",
+    "product": "membresias-backoffice",
+    "repository": "membresias-backoffice",
+    "isNew": false
+  },
+  {
+    "name": "react-redux",
+    "version": "9.1.0",
+    "quadrant": "gestion-de-estado",
+    "ring": "adopt",
+    "product": "membresias-backoffice",
+    "repository": "membresias-backoffice",
+    "isNew": false
+  },
+  {
+    "name": "jest",
+    "version": "29.7.0",
+    "quadrant": "testing",
+    "ring": "adopt",
+    "product": "membresias-backoffice",
+    "repository": "membresias-backoffice",
+    "isNew": false
+  },
+  {
+    "name": "@testing-library/react",
+    "version": "15.0.0",
+    "quadrant": "testing",
+    "ring": "adopt",
+    "product": "membresias-backoffice",
+    "repository": "membresias-backoffice",
+    "isNew": false
+  },
+  {
+    "name": "tailwindcss",
+    "version": "3.4.17",
+    "quadrant": "estilos-ui",
+    "ring": "adopt",
+    "product": "membresias-backoffice",
+    "repository": "membresias-backoffice",
+    "isNew": false
+  },
+  {
+    "name": "sass",
+    "version": "1.77.0",
+    "quadrant": "estilos-ui",
+    "ring": "adopt",
+    "product": "membresias-backoffice",
+    "repository": "membresias-backoffice",
+    "isNew": true
+  },
+  {
+    "name": "typescript",
+    "version": "5.5.0",
+    "quadrant": "build-tools",
+    "ring": "adopt",
+    "product": "membresias-backoffice",
+    "repository": "membresias-backoffice",
+    "isNew": false
+  },
+  {
+    "name": "eslint",
+    "version": "8.57.0",
+    "quadrant": "build-tools",
+    "ring": "adopt",
+    "product": "membresias-backoffice",
+    "repository": "membresias-backoffice",
+    "isNew": false
+  }
+]
