@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { calculateBlipPosition } from './calculateBlipPosition';
+import { calculateBlipPosition } from '@/radar/domain/services/calculateBlipPosition';
 
 describe('calculateBlipPosition', () => {
   it('returns coordinates within the radar bounds', () => {

@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { getRadarEntries } from './getRadarEntries';
-import type { RadarRepository } from '../ports/RadarRepository';
+import { getRadarEntries } from '@/radar/application/use-cases/getRadarEntries';
+import type { RadarRepository } from '@/radar/application/ports/RadarRepository';
 import type { RadarEntry } from '@/radar/domain/entities/RadarEntry';
 
 const mockEntries: RadarEntry[] = [

@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { readFileSync, existsSync } from 'fs';
-import { join } from 'path';
+import { readFileSync, existsSync } from 'node:fs';
+import { join } from 'node:path';
 import type { RadarRepository } from '@/radar/application/ports/RadarRepository';
 import type { RadarEntry } from '@/radar/domain/entities/RadarEntry';
 import { RINGS } from '@/radar/domain/value-objects/Ring';

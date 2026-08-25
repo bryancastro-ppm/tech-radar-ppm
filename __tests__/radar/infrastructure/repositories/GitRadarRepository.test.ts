@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { GitRadarRepository } from './GitRadarRepository';
+import { GitRadarRepository } from '@/radar/infrastructure/repositories/GitRadarRepository';
 
 const mockValidData = [
   {
