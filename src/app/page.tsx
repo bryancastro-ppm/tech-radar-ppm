@@ -11,6 +11,17 @@ interface PageProps {
   searchParams: Promise<{ quadrant?: string; product?: string }>;
 }
 
+function FiltersSkeleton() {
+  return (
+    <div className="bg-card border border-border rounded-lg p-4 animate-pulse">
+      <div className="flex gap-4">
+        <div className="h-14 w-48 rounded-lg bg-muted" />
+        <div className="h-14 w-48 rounded-lg bg-muted" />
+      </div>
+    </div>
+  );
+}
+
 export default async function RadarPage({ searchParams }: PageProps) {
   const params = await searchParams;
   const repository = new LocalRadarRepository();
@@ -18,21 +29,13 @@ export default async function RadarPage({ searchParams }: PageProps) {
 
   return (
     <RadarPageLayout sidebar={<RadarLegend />}>
-      <Suspense fallback={<div>Cargando filtros...</div>}>
+      <Suspense fallback={<FiltersSkeleton />}>
         <RadarFilters />
       </Suspense>
 
-      <div className="mb-8">
-        <h2 className="text-xl font-semibold mb-4">Visualización del Radar</h2>
-        <RadarChart entries={entries} />
-      </div>
+      <RadarChart entries={entries} />
 
-      <div>
-        <h2 className="text-xl font-semibold mb-4">
-          Lista de Dependencias ({entries.length})
-        </h2>
-        <RadarTable entries={entries} />
-      </div>
+      <RadarTable entries={entries} />
     </RadarPageLayout>
   );
 }

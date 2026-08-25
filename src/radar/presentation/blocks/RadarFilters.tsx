@@ -2,7 +2,7 @@
 
 import React, { memo, useCallback } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { Select, SelectItem } from '@heroui/react';
+import { Select, SelectItem, Button, Card, CardBody } from '@heroui/react';
 import type { SharedSelection } from '@heroui/react';
 import { QUADRANTS, type Quadrant } from '@/radar/domain/value-objects/Quadrant';
 import { PRODUCTS } from '@/radar/domain/entities/Product';
@@ -58,45 +58,61 @@ const RadarFilters = memo(function RadarFilters() {
     router.push('/');
   }, [router]);
 
+  const hasFilters = currentQuadrant || currentProduct;
+
   return (
-    <div className="flex flex-wrap gap-4 mb-6">
-      <Select
-        label="Cuadrante"
-        placeholder="Todos los cuadrantes"
-        selectedKeys={currentQuadrant ? [currentQuadrant] : []}
-        onSelectionChange={handleQuadrantChange}
-        className="max-w-xs"
-      >
-        {[...QUADRANTS, 'sin-categorizar' as const].map((quadrant) => (
-          <SelectItem key={quadrant}>
-            {quadrantLabels[quadrant]}
-          </SelectItem>
-        ))}
-      </Select>
+    <Card className="bg-card border border-border shadow-sm">
+      <CardBody>
+        <div className="flex flex-wrap items-end gap-4">
+          <Select
+            label="Cuadrante"
+            placeholder="Todos los cuadrantes"
+            selectedKeys={currentQuadrant ? [currentQuadrant] : []}
+            onSelectionChange={handleQuadrantChange}
+            className="max-w-xs"
+            classNames={{
+              trigger: 'bg-background border-border',
+              label: 'text-muted-foreground',
+            }}
+          >
+            {[...QUADRANTS, 'sin-categorizar' as const].map((quadrant) => (
+              <SelectItem key={quadrant}>
+                {quadrantLabels[quadrant]}
+              </SelectItem>
+            ))}
+          </Select>
 
-      <Select
-        label="Producto"
-        placeholder="Todos los productos"
-        selectedKeys={currentProduct ? [currentProduct] : []}
-        onSelectionChange={handleProductChange}
-        className="max-w-xs"
-      >
-        {PRODUCTS.map((product) => (
-          <SelectItem key={product.id}>
-            {product.name}
-          </SelectItem>
-        ))}
-      </Select>
+          <Select
+            label="Producto"
+            placeholder="Todos los productos"
+            selectedKeys={currentProduct ? [currentProduct] : []}
+            onSelectionChange={handleProductChange}
+            className="max-w-xs"
+            classNames={{
+              trigger: 'bg-background border-border',
+              label: 'text-muted-foreground',
+            }}
+          >
+            {PRODUCTS.map((product) => (
+              <SelectItem key={product.id}>
+                {product.name}
+              </SelectItem>
+            ))}
+          </Select>
 
-      {(currentQuadrant || currentProduct) && (
-        <button
-          onClick={handleClearFilters}
-          className="self-end px-4 py-2 text-sm text-primary hover:text-primary-600 transition-colors"
-        >
-          Limpiar filtros
-        </button>
-      )}
-    </div>
+          {hasFilters && (
+            <Button
+              variant="light"
+              color="primary"
+              onPress={handleClearFilters}
+              className="cursor-pointer"
+            >
+              Limpiar filtros
+            </Button>
+          )}
+        </div>
+      </CardBody>
+    </Card>
   );
 });
 

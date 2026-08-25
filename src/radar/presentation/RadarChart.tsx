@@ -1,7 +1,7 @@
 'use client';
 
 import React, { memo, useState, useMemo, useCallback } from 'react';
-import { Tooltip } from '@heroui/react';
+import { Tooltip, Card, CardBody } from '@heroui/react';
 import type { RadarEntry } from '@/radar/domain/entities/RadarEntry';
 import { calculateBlipPosition } from '@/radar/domain/services/calculateBlipPosition';
 import { RINGS, type Ring } from '@/radar/domain/value-objects/Ring';
@@ -64,86 +64,95 @@ const RadarChart = memo(function RadarChart({ entries }: RadarChartProps) {
   }, []);
 
   return (
-    <div className="relative w-full max-w-2xl mx-auto">
-      <svg viewBox="0 0 100 100" role="img" aria-label="Tech Radar frontend" className="w-full h-auto">
-        {ringRadii.map((r, index) => (
-          <g key={r}>
-            <circle
-              cx={50}
-              cy={50}
-              r={r * 45}
-              className="fill-none stroke-gray-200"
-              strokeWidth={0.3}
-            />
-            <text
-              x={50}
-              y={50 - r * 45 + 3}
-              textAnchor="middle"
-              className="fill-gray-400"
-              fontSize={2}
-            >
-              {ringLabels[RINGS[index]]}
-            </text>
-          </g>
-        ))}
+    <Card className="bg-card border border-border shadow-sm">
+      <CardBody className="p-6">
+        <div className="relative w-full max-w-2xl mx-auto">
+          <svg viewBox="0 0 100 100" role="img" aria-label="Tech Radar frontend" className="w-full h-auto">
+            {ringRadii.map((r, index) => (
+              <g key={r}>
+                <circle
+                  cx={50}
+                  cy={50}
+                  r={r * 45}
+                  className="fill-none stroke-border"
+                  strokeWidth={0.3}
+                />
+                <text
+                  x={50}
+                  y={50 - r * 45 + 3}
+                  textAnchor="middle"
+                  className="fill-muted-foreground"
+                  fontSize={2}
+                >
+                  {ringLabels[RINGS[index]]}
+                </text>
+              </g>
+            ))}
 
-        {quadrantAngles.map((angle) => (
-          <line
-            key={angle}
-            x1={50}
-            y1={50}
-            x2={50 + 45 * Math.cos((angle * Math.PI) / 180)}
-            y2={50 + 45 * Math.sin((angle * Math.PI) / 180)}
-            className="stroke-gray-200"
-            strokeWidth={0.2}
-          />
-        ))}
+            {quadrantAngles.map((angle) => {
+              // Round to avoid floating point precision differences between server/client
+              const x2 = Math.round((50 + 45 * Math.cos((angle * Math.PI) / 180)) * 1000) / 1000;
+              const y2 = Math.round((50 + 45 * Math.sin((angle * Math.PI) / 180)) * 1000) / 1000;
+              return (
+                <line
+                  key={angle}
+                  x1={50}
+                  y1={50}
+                  x2={x2}
+                  y2={y2}
+                  className="stroke-border"
+                  strokeWidth={0.2}
+                />
+              );
+            })}
 
-        {entries.map((entry, i) => {
-          const sameQuadrant = groupedByQuadrant[entry.quadrant] || [];
-          const indexInQuadrant = sameQuadrant.indexOf(entry);
-          const { x, y } = calculateBlipPosition(
-            entry.ring,
-            entry.quadrant,
-            indexInQuadrant,
-            sameQuadrant.length,
-          );
+            {entries.map((entry, i) => {
+              const sameQuadrant = groupedByQuadrant[entry.quadrant] || [];
+              const indexInQuadrant = sameQuadrant.indexOf(entry);
+              const { x, y } = calculateBlipPosition(
+                entry.ring,
+                entry.quadrant,
+                indexInQuadrant,
+                sameQuadrant.length,
+              );
 
-          return (
-            <Tooltip
-              key={`${entry.repository}-${entry.name}-${i}`}
-              content={
-                <div className="p-2">
-                  <p className="font-semibold">{entry.name}</p>
-                  <p className="text-xs text-gray-500">v{entry.version}</p>
-                  <p className="text-xs">{quadrantLabels[entry.quadrant]}</p>
-                  <p className="text-xs">{entry.product}</p>
-                </div>
-              }
-            >
-              <circle
-                cx={x}
-                cy={y}
-                r={1.2}
-                fill={quadrantColors[entry.quadrant]}
-                className="cursor-pointer hover:opacity-80 transition-opacity"
-                onMouseEnter={() => handleMouseEnter(entry)}
-                onMouseLeave={handleMouseLeave}
-              />
-            </Tooltip>
-          );
-        })}
-      </svg>
+              return (
+                <Tooltip
+                  key={`${entry.repository}-${entry.name}-${i}`}
+                  content={
+                    <div className="p-2">
+                      <p className="font-semibold text-foreground">{entry.name}</p>
+                      <p className="text-xs text-muted-foreground">v{entry.version}</p>
+                      <p className="text-xs text-foreground">{quadrantLabels[entry.quadrant]}</p>
+                      <p className="text-xs text-muted-foreground">{entry.product}</p>
+                    </div>
+                  }
+                >
+                  <circle
+                    cx={x}
+                    cy={y}
+                    r={1.2}
+                    fill={quadrantColors[entry.quadrant]}
+                    className="cursor-pointer hover:opacity-80 transition-opacity duration-150"
+                    onMouseEnter={() => handleMouseEnter(entry)}
+                    onMouseLeave={handleMouseLeave}
+                  />
+                </Tooltip>
+              );
+            })}
+          </svg>
 
-      {hoveredEntry && (
-        <div className="absolute bottom-4 left-4 bg-white p-3 rounded-lg shadow-lg border border-gray-200">
-          <p className="font-semibold">{hoveredEntry.name}</p>
-          <p className="text-sm text-gray-500">v{hoveredEntry.version}</p>
-          <p className="text-sm">{quadrantLabels[hoveredEntry.quadrant]}</p>
-          <p className="text-sm text-gray-400">{hoveredEntry.product}</p>
+          {hoveredEntry && (
+            <div className="absolute bottom-4 left-4 bg-card p-3 rounded-lg shadow-lg border border-border">
+              <p className="font-semibold text-card-foreground">{hoveredEntry.name}</p>
+              <p className="text-sm text-muted-foreground">v{hoveredEntry.version}</p>
+              <p className="text-sm text-card-foreground">{quadrantLabels[hoveredEntry.quadrant]}</p>
+              <p className="text-sm text-muted-foreground">{hoveredEntry.product}</p>
+            </div>
+          )}
         </div>
-      )}
-    </div>
+      </CardBody>
+    </Card>
   );
 });
 

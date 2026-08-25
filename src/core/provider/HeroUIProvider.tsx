@@ -1,6 +1,7 @@
 'use client';
 
 import { HeroUIProvider as Provider } from '@heroui/react';
+import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import { useRouter } from 'next/navigation';
 import type { ReactNode } from 'react';
 
@@ -13,7 +14,14 @@ export function HeroUIProvider({ children }: HeroUIProviderProps) {
 
   return (
     <Provider navigate={router.push}>
-      {children}
+      <NextThemesProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem
+        disableTransitionOnChange
+      >
+        {children}
+      </NextThemesProvider>
     </Provider>
   );
 }
