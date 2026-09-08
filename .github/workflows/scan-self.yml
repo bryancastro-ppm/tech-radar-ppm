@@ -24,7 +24,7 @@ jobs:
           node-version: '22'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm i && npm ci
 
       - name: Detect dependencies
         run: npm run ingest
