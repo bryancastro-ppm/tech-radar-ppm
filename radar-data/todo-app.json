@@ -1,0 +1,101 @@
+[
+  {
+    "name": "@material-ui/core",
+    "version": "4.12.4",
+    "quadrant": "sin-categorizar",
+    "ring": "adopt",
+    "product": "todo-app",
+    "repository": "bryancastro-ppm/todo-app",
+    "isNew": true
+  },
+  {
+    "name": "@material-ui/icons",
+    "version": "4.9.1",
+    "quadrant": "sin-categorizar",
+    "ring": "adopt",
+    "product": "todo-app",
+    "repository": "bryancastro-ppm/todo-app",
+    "isNew": true
+  },
+  {
+    "name": "@testing-library/jest-dom",
+    "version": "4.2.4",
+    "quadrant": "testing",
+    "ring": "adopt",
+    "product": "todo-app",
+    "repository": "bryancastro-ppm/todo-app",
+    "isNew": true
+  },
+  {
+    "name": "@testing-library/react",
+    "version": "9.5.0",
+    "quadrant": "testing",
+    "ring": "adopt",
+    "product": "todo-app",
+    "repository": "bryancastro-ppm/todo-app",
+    "isNew": true
+  },
+  {
+    "name": "@testing-library/user-event",
+    "version": "7.2.1",
+    "quadrant": "testing",
+    "ring": "adopt",
+    "product": "todo-app",
+    "repository": "bryancastro-ppm/todo-app",
+    "isNew": true
+  },
+  {
+    "name": "axios",
+    "version": "0.21.1",
+    "quadrant": "frameworks-librerias",
+    "ring": "adopt",
+    "product": "todo-app",
+    "repository": "bryancastro-ppm/todo-app",
+    "isNew": true
+  },
+  {
+    "name": "dayjs",
+    "version": "1.8.27",
+    "quadrant": "frameworks-librerias",
+    "ring": "adopt",
+    "product": "todo-app",
+    "repository": "bryancastro-ppm/todo-app",
+    "isNew": true
+  },
+  {
+    "name": "react",
+    "version": "16.13.1",
+    "quadrant": "frameworks-librerias",
+    "ring": "adopt",
+    "product": "todo-app",
+    "repository": "bryancastro-ppm/todo-app",
+    "isNew": true
+  },
+  {
+    "name": "react-dom",
+    "version": "16.13.1",
+    "quadrant": "frameworks-librerias",
+    "ring": "adopt",
+    "product": "todo-app",
+    "repository": "bryancastro-ppm/todo-app",
+    "isNew": true
+  },
+  {
+    "name": "react-router-dom",
+    "version": "5.2.0",
+    "quadrant": "sin-categorizar",
+    "ring": "adopt",
+    "product": "todo-app",
+    "repository": "bryancastro-ppm/todo-app",
+    "isNew": true
+  },
+  {
+    "name": "react-scripts",
+    "version": "3.4.1",
+    "quadrant": "sin-categorizar",
+    "ring": "adopt",
+    "product": "todo-app",
+    "repository": "bryancastro-ppm/todo-app",
+    "isNew": true
+  }
+]
