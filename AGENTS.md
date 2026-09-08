@@ -54,6 +54,7 @@ Following chapter conventions:
 3. Ingest system detects dependencies with resolved versions from lockfile
 4. Generated JSON is pushed to `radar-data/`
 5. App revalidates via `/api/revalidate` endpoint
+6. **Product list is automatically discovered** from JSON files in `radar-data/`
 
 ## Dependency Ingestion
 The new ingest system (`src/ingest/`) automatically detects dependencies from repositories:
@@ -62,3 +63,13 @@ The new ingest system (`src/ingest/`) automatically detects dependencies from re
 - Categorizes packages into quadrants
 - Marks new dependencies
 - See `docs/ingest-system.md` for full documentation
+
+## Dynamic Product Discovery
+**IMPORTANT**: The product list is now **automatically generated** from `radar-data/` directory:
+- **DO NOT** hardcode product lists in code
+- Products are discovered by scanning `*.json` files in `radar-data/`
+- Product names are auto-generated from filenames (e.g., `todo-app.json` → "Todo App")
+- New products appear automatically when their JSON file is added
+- Implementation: `src/radar/infrastructure/utils/getAvailableProducts.ts`
+- API endpoint: `/api/products` returns current product list
+- UI automatically updates when new products are scanned

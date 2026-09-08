@@ -1,11 +1,11 @@
 'use client';
 
-import React, { memo, useCallback } from 'react';
+import React, { memo, useCallback, useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Select, SelectItem, Button, Card, CardBody } from '@heroui/react';
 import type { SharedSelection } from '@heroui/react';
 import { QUADRANTS, type Quadrant } from '@/radar/domain/value-objects/Quadrant';
-import { PRODUCTS } from '@/radar/domain/entities/Product';
+import type { Product } from '@/radar/domain/entities/Product';
 
 const quadrantLabels: Record<Quadrant, string> = {
   'frameworks-librerias': 'Frameworks y Librerías',
@@ -19,9 +19,29 @@ const quadrantLabels: Record<Quadrant, string> = {
 const RadarFilters = memo(function RadarFilters() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isLoadingProducts, setIsLoadingProducts] = useState(true);
 
   const currentQuadrant = searchParams.get('quadrant') || '';
   const currentProduct = searchParams.get('product') || '';
+
+  // Fetch available products dynamically
+  useEffect(() => {
+    async function fetchProducts() {
+      try {
+        const response = await fetch('/api/products');
+        if (response.ok) {
+          const data = await response.json();
+          setProducts(data);
+        }
+      } catch (error) {
+        console.error('Failed to fetch products:', error);
+      } finally {
+        setIsLoadingProducts(false);
+      }
+    }
+    fetchProducts();
+  }, []);
 
   const updateFilter = useCallback(
     (key: string, value: string) => {
@@ -92,8 +112,9 @@ const RadarFilters = memo(function RadarFilters() {
               trigger: 'bg-background border-border',
               label: 'text-muted-foreground',
             }}
+            isLoading={isLoadingProducts}
           >
-            {PRODUCTS.map((product) => (
+            {products.map((product) => (
               <SelectItem key={product.id}>
                 {product.name}
               </SelectItem>

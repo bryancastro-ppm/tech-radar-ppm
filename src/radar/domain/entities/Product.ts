@@ -4,15 +4,9 @@ export interface Product {
   readonly repository: string;
 }
 
-export const PRODUCTS: Product[] = [
-  {
-    id: 'membresias-web',
-    name: 'Membresías Web',
-    repository: 'membresias-web',
-  },
-  {
-    id: 'membresias-backoffice',
-    name: 'Membresías Backoffice',
-    repository: 'membresias-backoffice',
-  },
-];
+/**
+ * @deprecated Use getAvailableProducts() from infrastructure layer instead.
+ * This will be automatically populated from radar-data directory.
+ * Kept for backward compatibility only.
+ */
+export const PRODUCTS: Product[] = [];

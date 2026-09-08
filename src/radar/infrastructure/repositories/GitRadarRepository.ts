@@ -3,6 +3,7 @@ import type { RadarRepository } from '@/radar/application/ports/RadarRepository'
 import type { RadarEntry } from '@/radar/domain/entities/RadarEntry';
 import { RINGS } from '@/radar/domain/value-objects/Ring';
 import { QUADRANTS } from '@/radar/domain/value-objects/Quadrant';
+import { getProductIds } from '@/radar/infrastructure/utils/getAvailableProducts';
 
 const RadarEntrySchema = z.object({
   name: z.string(),
@@ -16,12 +17,12 @@ const RadarEntrySchema = z.object({
 
 const RAW_BASE_URL =
   process.env.RADAR_DATA_URL || 'http://localhost:3000/api/radar-data';
-const PRODUCTS = ['membresias-web', 'membresias-backoffice'];
 
 export class GitRadarRepository implements RadarRepository {
   async getAll(): Promise<RadarEntry[]> {
+    const products = getProductIds();
     const results = await Promise.all(
-      PRODUCTS.map(async (product) => {
+      products.map(async (product) => {
         try {
           const res = await fetch(`${RAW_BASE_URL}/${product}.json`, {
             next: { tags: ['radar-data'] },
