@@ -50,7 +50,7 @@ jobs:
           node-version: '22'
 
       - name: Install tech-radar dependencies
-        run: npm ci --legacy-peer-deps
+        run: npm i && npm ci
         working-directory: .tech-radar
 
       - name: Detect dependencies
