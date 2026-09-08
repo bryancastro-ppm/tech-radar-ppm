@@ -5,6 +5,7 @@ import type { RadarRepository } from '@/radar/application/ports/RadarRepository'
 import type { RadarEntry } from '@/radar/domain/entities/RadarEntry';
 import { RINGS } from '@/radar/domain/value-objects/Ring';
 import { QUADRANTS } from '@/radar/domain/value-objects/Quadrant';
+import { getProductIds } from '@/radar/infrastructure/utils/getAvailableProducts';
 
 const RadarEntrySchema = z.object({
   name: z.string(),
@@ -16,8 +17,6 @@ const RadarEntrySchema = z.object({
   isNew: z.boolean(),
 });
 
-const PRODUCTS = ['membresias-web', 'membresias-backoffice'];
-
 export class LocalRadarRepository implements RadarRepository {
   private readonly basePath: string;
 
@@ -26,7 +25,8 @@ export class LocalRadarRepository implements RadarRepository {
   }
 
   async getAll(): Promise<RadarEntry[]> {
-    const results = PRODUCTS.map((product) => {
+    const products = getProductIds();
+    const results = products.map((product) => {
       try {
         const filePath = join(this.basePath, `${product}.json`);
 
