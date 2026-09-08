@@ -5,8 +5,8 @@
     "quadrant": "frameworks-librerias",
     "ring": "adopt",
     "product": "tech-radar",
-    "repository": "tech-radar",
-    "isNew": false
+    "repository": "bryancastro-ppm/tech-radar-ppm",
+    "isNew": true
   },
   {
     "name": "@netlify/plugin-nextjs",
@@ -14,8 +14,8 @@
     "quadrant": "build-tools",
     "ring": "adopt",
     "product": "tech-radar",
-    "repository": "tech-radar",
-    "isNew": false
+    "repository": "bryancastro-ppm/tech-radar-ppm",
+    "isNew": true
   },
   {
     "name": "@testing-library/dom",
@@ -23,8 +23,8 @@
     "quadrant": "testing",
     "ring": "adopt",
     "product": "tech-radar",
-    "repository": "tech-radar",
-    "isNew": false
+    "repository": "bryancastro-ppm/tech-radar-ppm",
+    "isNew": true
   },
   {
     "name": "@testing-library/jest-dom",
@@ -32,8 +32,8 @@
     "quadrant": "testing",
     "ring": "adopt",
     "product": "tech-radar",
-    "repository": "tech-radar",
-    "isNew": false
+    "repository": "bryancastro-ppm/tech-radar-ppm",
+    "isNew": true
   },
   {
     "name": "@testing-library/react",
@@ -41,8 +41,8 @@
     "quadrant": "testing",
     "ring": "adopt",
     "product": "tech-radar",
-    "repository": "tech-radar",
-    "isNew": false
+    "repository": "bryancastro-ppm/tech-radar-ppm",
+    "isNew": true
   },
   {
     "name": "@types/node",
@@ -50,8 +50,8 @@
     "quadrant": "build-tools",
     "ring": "adopt",
     "product": "tech-radar",
-    "repository": "tech-radar",
-    "isNew": false
+    "repository": "bryancastro-ppm/tech-radar-ppm",
+    "isNew": true
   },
   {
     "name": "@types/react",
@@ -59,8 +59,8 @@
     "quadrant": "build-tools",
     "ring": "adopt",
     "product": "tech-radar",
-    "repository": "tech-radar",
-    "isNew": false
+    "repository": "bryancastro-ppm/tech-radar-ppm",
+    "isNew": true
   },
   {
     "name": "@types/react-dom",
@@ -68,8 +68,8 @@
     "quadrant": "build-tools",
     "ring": "adopt",
     "product": "tech-radar",
-    "repository": "tech-radar",
-    "isNew": false
+    "repository": "bryancastro-ppm/tech-radar-ppm",
+    "isNew": true
   },
   {
     "name": "@vitejs/plugin-react",
@@ -77,8 +77,8 @@
     "quadrant": "build-tools",
     "ring": "adopt",
     "product": "tech-radar",
-    "repository": "tech-radar",
-    "isNew": false
+    "repository": "bryancastro-ppm/tech-radar-ppm",
+    "isNew": true
   },
   {
     "name": "autoprefixer",
@@ -86,8 +86,8 @@
     "quadrant": "estilos-ui",
     "ring": "adopt",
     "product": "tech-radar",
-    "repository": "tech-radar",
-    "isNew": false
+    "repository": "bryancastro-ppm/tech-radar-ppm",
+    "isNew": true
   },
   {
     "name": "eslint",
@@ -95,8 +95,8 @@
     "quadrant": "build-tools",
     "ring": "adopt",
     "product": "tech-radar",
-    "repository": "tech-radar",
-    "isNew": false
+    "repository": "bryancastro-ppm/tech-radar-ppm",
+    "isNew": true
   },
   {
     "name": "eslint-config-next",
@@ -104,8 +104,8 @@
     "quadrant": "build-tools",
     "ring": "adopt",
     "product": "tech-radar",
-    "repository": "tech-radar",
-    "isNew": false
+    "repository": "bryancastro-ppm/tech-radar-ppm",
+    "isNew": true
   },
   {
     "name": "framer-motion",
@@ -113,8 +113,8 @@
     "quadrant": "frameworks-librerias",
     "ring": "adopt",
     "product": "tech-radar",
-    "repository": "tech-radar",
-    "isNew": false
+    "repository": "bryancastro-ppm/tech-radar-ppm",
+    "isNew": true
   },
   {
     "name": "jsdom",
@@ -122,8 +122,8 @@
     "quadrant": "testing",
     "ring": "adopt",
     "product": "tech-radar",
-    "repository": "tech-radar",
-    "isNew": false
+    "repository": "bryancastro-ppm/tech-radar-ppm",
+    "isNew": true
   },
   {
     "name": "next",
@@ -131,8 +131,8 @@
     "quadrant": "frameworks-librerias",
     "ring": "adopt",
     "product": "tech-radar",
-    "repository": "tech-radar",
-    "isNew": false
+    "repository": "bryancastro-ppm/tech-radar-ppm",
+    "isNew": true
   },
   {
     "name": "next-themes",
@@ -140,8 +140,8 @@
     "quadrant": "frameworks-librerias",
     "ring": "adopt",
     "product": "tech-radar",
-    "repository": "tech-radar",
-    "isNew": false
+    "repository": "bryancastro-ppm/tech-radar-ppm",
+    "isNew": true
   },
   {
     "name": "postcss",
@@ -149,8 +149,8 @@
     "quadrant": "estilos-ui",
     "ring": "adopt",
     "product": "tech-radar",
-    "repository": "tech-radar",
-    "isNew": false
+    "repository": "bryancastro-ppm/tech-radar-ppm",
+    "isNew": true
   },
   {
     "name": "prettier",
@@ -158,8 +158,8 @@
     "quadrant": "build-tools",
     "ring": "adopt",
     "product": "tech-radar",
-    "repository": "tech-radar",
-    "isNew": false
+    "repository": "bryancastro-ppm/tech-radar-ppm",
+    "isNew": true
   },
   {
     "name": "react",
@@ -167,8 +167,8 @@
     "quadrant": "frameworks-librerias",
     "ring": "adopt",
     "product": "tech-radar",
-    "repository": "tech-radar",
-    "isNew": false
+    "repository": "bryancastro-ppm/tech-radar-ppm",
+    "isNew": true
   },
   {
     "name": "react-dom",
@@ -176,8 +176,8 @@
     "quadrant": "frameworks-librerias",
     "ring": "adopt",
     "product": "tech-radar",
-    "repository": "tech-radar",
-    "isNew": false
+    "repository": "bryancastro-ppm/tech-radar-ppm",
+    "isNew": true
   },
   {
     "name": "tailwindcss",
@@ -185,8 +185,8 @@
     "quadrant": "estilos-ui",
     "ring": "adopt",
     "product": "tech-radar",
-    "repository": "tech-radar",
-    "isNew": false
+    "repository": "bryancastro-ppm/tech-radar-ppm",
+    "isNew": true
   },
   {
     "name": "tsx",
@@ -194,8 +194,8 @@
     "quadrant": "build-tools",
     "ring": "adopt",
     "product": "tech-radar",
-    "repository": "tech-radar",
-    "isNew": false
+    "repository": "bryancastro-ppm/tech-radar-ppm",
+    "isNew": true
   },
   {
     "name": "typescript",
@@ -203,8 +203,8 @@
     "quadrant": "build-tools",
     "ring": "adopt",
     "product": "tech-radar",
-    "repository": "tech-radar",
-    "isNew": false
+    "repository": "bryancastro-ppm/tech-radar-ppm",
+    "isNew": true
   },
   {
     "name": "vitest",
@@ -212,8 +212,8 @@
     "quadrant": "testing",
     "ring": "adopt",
     "product": "tech-radar",
-    "repository": "tech-radar",
-    "isNew": false
+    "repository": "bryancastro-ppm/tech-radar-ppm",
+    "isNew": true
   },
   {
     "name": "zod",
@@ -221,7 +221,7 @@
     "quadrant": "build-tools",
     "ring": "adopt",
     "product": "tech-radar",
-    "repository": "tech-radar",
-    "isNew": false
+    "repository": "bryancastro-ppm/tech-radar-ppm",
+    "isNew": true
   }
 ]
