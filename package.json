@@ -14,7 +14,8 @@
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
     "typecheck": "tsc --noEmit",
-    "scan": "tsx scripts/ingest/scanDependencies.ts"
+    "scan": "tsx scripts/ingest/scanDependencies.ts",
+    "ingest": "tsx src/ingest/index.ts"
   },
   "dependencies": {
     "@heroui/react": "^2.6.14",

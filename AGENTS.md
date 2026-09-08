@@ -20,7 +20,8 @@ Tech Radar for Frontend tools used by the Membresías chapter. Built with Clean 
 - `npm run test:run` - Run tests once
 - `npm run typecheck` - TypeScript type checking
 - `npm run lint` - ESLint
-- `npm run scan` - Scan dependencies from a package.json
+- `npm run scan` - (Legacy) Scan dependencies from a package.json
+- `npm run ingest` - Detect and ingest dependencies (new system, see docs/ingest-system.md)
 
 ## Architecture
 This project follows Clean Architecture with the following layers:
@@ -48,7 +49,16 @@ Following chapter conventions:
 - Use fake repositories for testing use-cases
 
 ## Data Flow
-1. Product repos push changes to `package.json`
-2. GitHub Action runs `scanDependencies.ts`
-3. Generated JSON is pushed to `radar-data/`
-4. App revalidates via `/api/revalidate` endpoint
+1. Product repos push changes to `package.json` or lockfile
+2. GitHub Action triggers dependency scan workflow
+3. Ingest system detects dependencies with resolved versions from lockfile
+4. Generated JSON is pushed to `radar-data/`
+5. App revalidates via `/api/revalidate` endpoint
+
+## Dependency Ingestion
+The new ingest system (`src/ingest/`) automatically detects dependencies from repositories:
+- Reads `package.json` for declared dependencies
+- Resolves actual versions from lockfile (npm, yarn, pnpm)
+- Categorizes packages into quadrants
+- Marks new dependencies
+- See `docs/ingest-system.md` for full documentation

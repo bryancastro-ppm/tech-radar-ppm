@@ -5,6 +5,7 @@ const categorizationMap: Record<string, Quadrant> = {
   react: 'frameworks-librerias',
   'react-dom': 'frameworks-librerias',
   next: 'frameworks-librerias',
+  'next-themes': 'frameworks-librerias',
   vue: 'frameworks-librerias',
   angular: 'frameworks-librerias',
   svelte: 'frameworks-librerias',
@@ -73,6 +74,10 @@ const categorizationMap: Record<string, Quadrant> = {
   tsx: 'build-tools',
   'ts-node': 'build-tools',
   zod: 'build-tools',
+  '@netlify/plugin-nextjs': 'build-tools',
+  '@types/node': 'build-tools',
+  '@types/react': 'build-tools',
+  '@types/react-dom': 'build-tools',
 };
 
 export function categorizePackage(packageName: string): Quadrant {

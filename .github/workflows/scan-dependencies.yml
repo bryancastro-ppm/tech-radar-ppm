@@ -1,0 +1,81 @@
+name: Scan Dependencies
+
+# This workflow can be called from product repositories to automatically
+# detect and publish their dependencies to the tech radar.
+#
+# Usage in product repos (e.g., membresias-web):
+#
+# name: Radar Scan
+# on:
+#   push:
+#     branches: [main]
+#     paths: ['package.json', 'package-lock.json']
+# jobs:
+#   scan:
+#     uses: <org>/tech-radar/.github/workflows/scan-dependencies.yml@main
+#     with:
+#       product-name: membresias-web
+#     secrets:
+#       RADAR_DATA_PUSH_TOKEN: ${{ secrets.RADAR_DATA_PUSH_TOKEN }}
+
+on:
+  workflow_call:
+    inputs:
+      product-name:
+        description: 'Name of the product (e.g., membresias-web)'
+        required: true
+        type: string
+    secrets:
+      RADAR_DATA_PUSH_TOKEN:
+        description: 'GitHub token with write access to radar-data repository'
+        required: true
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout product repository
+        uses: actions/checkout@v4
+
+      - name: Checkout tech-radar repository
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository_owner }}/tech-radar-ppm
+          path: .tech-radar
+          token: ${{ secrets.RADAR_DATA_PUSH_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install tech-radar dependencies
+        run: npm ci
+        working-directory: .tech-radar
+
+      - name: Detect dependencies
+        run: npm run ingest
+        working-directory: .tech-radar
+        env:
+          REPO_PATH: ${{ github.workspace }}
+          PRODUCT_NAME: ${{ inputs.product-name }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          OUTPUT_DIR: ${{ github.workspace }}/.tech-radar/radar-data
+
+      - name: Commit and push radar data
+        working-directory: .tech-radar
+        env:
+          RADAR_DATA_PUSH_TOKEN: ${{ secrets.RADAR_DATA_PUSH_TOKEN }}
+        run: |
+          git config user.name "radar-bot"
+          git config user.email "radar-bot@users.noreply.github.com"
+          git add radar-data/${{ inputs.product-name }}.json
+
+          # Only commit if there are changes
+          if git diff --staged --quiet; then
+            echo "No changes to radar data"
+          else
+            git commit -m "chore: update ${{ inputs.product-name }} dependencies"
+            git push
+            echo "✅ Radar data updated successfully"
+          fi

@@ -1,0 +1,227 @@
+[
+  {
+    "name": "@heroui/react",
+    "version": "2.6.14",
+    "quadrant": "frameworks-librerias",
+    "ring": "adopt",
+    "product": "tech-radar",
+    "repository": "tech-radar",
+    "isNew": false
+  },
+  {
+    "name": "@netlify/plugin-nextjs",
+    "version": "5.15.13",
+    "quadrant": "build-tools",
+    "ring": "adopt",
+    "product": "tech-radar",
+    "repository": "tech-radar",
+    "isNew": false
+  },
+  {
+    "name": "@testing-library/dom",
+    "version": "10.4.1",
+    "quadrant": "testing",
+    "ring": "adopt",
+    "product": "tech-radar",
+    "repository": "tech-radar",
+    "isNew": false
+  },
+  {
+    "name": "@testing-library/jest-dom",
+    "version": "7.0.1",
+    "quadrant": "testing",
+    "ring": "adopt",
+    "product": "tech-radar",
+    "repository": "tech-radar",
+    "isNew": false
+  },
+  {
+    "name": "@testing-library/react",
+    "version": "16.3.2",
+    "quadrant": "testing",
+    "ring": "adopt",
+    "product": "tech-radar",
+    "repository": "tech-radar",
+    "isNew": false
+  },
+  {
+    "name": "@types/node",
+    "version": "20.19.43",
+    "quadrant": "build-tools",
+    "ring": "adopt",
+    "product": "tech-radar",
+    "repository": "tech-radar",
+    "isNew": false
+  },
+  {
+    "name": "@types/react",
+    "version": "19.2.18",
+    "quadrant": "build-tools",
+    "ring": "adopt",
+    "product": "tech-radar",
+    "repository": "tech-radar",
+    "isNew": false
+  },
+  {
+    "name": "@types/react-dom",
+    "version": "19.2.4",
+    "quadrant": "build-tools",
+    "ring": "adopt",
+    "product": "tech-radar",
+    "repository": "tech-radar",
+    "isNew": false
+  },
+  {
+    "name": "@vitejs/plugin-react",
+    "version": "6.0.5",
+    "quadrant": "build-tools",
+    "ring": "adopt",
+    "product": "tech-radar",
+    "repository": "tech-radar",
+    "isNew": false
+  },
+  {
+    "name": "autoprefixer",
+    "version": "10.5.4",
+    "quadrant": "estilos-ui",
+    "ring": "adopt",
+    "product": "tech-radar",
+    "repository": "tech-radar",
+    "isNew": false
+  },
+  {
+    "name": "eslint",
+    "version": "9.39.5",
+    "quadrant": "build-tools",
+    "ring": "adopt",
+    "product": "tech-radar",
+    "repository": "tech-radar",
+    "isNew": false
+  },
+  {
+    "name": "eslint-config-next",
+    "version": "16.3.1",
+    "quadrant": "build-tools",
+    "ring": "adopt",
+    "product": "tech-radar",
+    "repository": "tech-radar",
+    "isNew": false
+  },
+  {
+    "name": "framer-motion",
+    "version": "13.1.0",
+    "quadrant": "frameworks-librerias",
+    "ring": "adopt",
+    "product": "tech-radar",
+    "repository": "tech-radar",
+    "isNew": false
+  },
+  {
+    "name": "jsdom",
+    "version": "29.1.1",
+    "quadrant": "testing",
+    "ring": "adopt",
+    "product": "tech-radar",
+    "repository": "tech-radar",
+    "isNew": false
+  },
+  {
+    "name": "next",
+    "version": "16.3.1",
+    "quadrant": "frameworks-librerias",
+    "ring": "adopt",
+    "product": "tech-radar",
+    "repository": "tech-radar",
+    "isNew": false
+  },
+  {
+    "name": "next-themes",
+    "version": "0.4.6",
+    "quadrant": "frameworks-librerias",
+    "ring": "adopt",
+    "product": "tech-radar",
+    "repository": "tech-radar",
+    "isNew": false
+  },
+  {
+    "name": "postcss",
+    "version": "8.5.26",
+    "quadrant": "estilos-ui",
+    "ring": "adopt",
+    "product": "tech-radar",
+    "repository": "tech-radar",
+    "isNew": false
+  },
+  {
+    "name": "prettier",
+    "version": "3.9.6",
+    "quadrant": "build-tools",
+    "ring": "adopt",
+    "product": "tech-radar",
+    "repository": "tech-radar",
+    "isNew": false
+  },
+  {
+    "name": "react",
+    "version": "19.2.8",
+    "quadrant": "frameworks-librerias",
+    "ring": "adopt",
+    "product": "tech-radar",
+    "repository": "tech-radar",
+    "isNew": false
+  },
+  {
+    "name": "react-dom",
+    "version": "19.2.8",
+    "quadrant": "frameworks-librerias",
+    "ring": "adopt",
+    "product": "tech-radar",
+    "repository": "tech-radar",
+    "isNew": false
+  },
+  {
+    "name": "tailwindcss",
+    "version": "3.4.17",
+    "quadrant": "estilos-ui",
+    "ring": "adopt",
+    "product": "tech-radar",
+    "repository": "tech-radar",
+    "isNew": false
+  },
+  {
+    "name": "tsx",
+    "version": "4.23.12",
+    "quadrant": "build-tools",
+    "ring": "adopt",
+    "product": "tech-radar",
+    "repository": "tech-radar",
+    "isNew": false
+  },
+  {
+    "name": "typescript",
+    "version": "5.9.3",
+    "quadrant": "build-tools",
+    "ring": "adopt",
+    "product": "tech-radar",
+    "repository": "tech-radar",
+    "isNew": false
+  },
+  {
+    "name": "vitest",
+    "version": "4.1.11",
+    "quadrant": "testing",
+    "ring": "adopt",
+    "product": "tech-radar",
+    "repository": "tech-radar",
+    "isNew": false
+  },
+  {
+    "name": "zod",
+    "version": "4.4.3",
+    "quadrant": "build-tools",
+    "ring": "adopt",
+    "product": "tech-radar",
+    "repository": "tech-radar",
+    "isNew": false
+  }
+]

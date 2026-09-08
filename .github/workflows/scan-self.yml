@@ -1,0 +1,50 @@
+name: Scan Tech Radar Dependencies
+
+# This workflow scans the tech-radar repository itself
+# and updates its own radar-data when dependencies change
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'package.json'
+      - 'package-lock.json'
+  workflow_dispatch:
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Detect dependencies
+        run: npm run ingest
+        env:
+          REPO_PATH: ${{ github.workspace }}
+          PRODUCT_NAME: tech-radar
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          OUTPUT_DIR: ${{ github.workspace }}/radar-data
+
+      - name: Commit and push radar data
+        run: |
+          git config user.name "radar-bot"
+          git config user.email "radar-bot@users.noreply.github.com"
+          git add radar-data/tech-radar.json
+
+          # Only commit if there are changes
+          if git diff --staged --quiet; then
+            echo "No changes to radar data"
+          else
+            git commit -m "chore: update tech-radar dependencies"
+            git push
+            echo "✅ Radar data updated successfully"
+          fi
