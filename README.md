@@ -163,6 +163,8 @@ Para agregar nuevas categorizaciones, edita `src/core/config/categorization-map.
 
 ## 📖 Documentación
 
+- [Documentación Técnica Completa](./documentation/TECH-DOCUMENTATION.md) — arquitectura, stack, flujos de datos, modelo de dominio, estado actual
+- [Índice de Documentación](./documentation/README.md)
 - [Especificación de Upload Feature](./docs/package-upload-feature-spec.md)
 - [Guía de Uso de Upload](./docs/upload-feature-usage.md)
 - [Sistema de Ingestión](./docs/ingest-system.md)
