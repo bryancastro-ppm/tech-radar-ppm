@@ -1,6 +1,8 @@
 'use client';
 
 import type { ReactNode } from 'react';
+import Link from 'next/link';
+import { Button } from '@heroui/react';
 import { ThemeToggle } from '../elements/ThemeToggle';
 
 interface RadarPageLayoutProps {
@@ -14,15 +16,26 @@ export function RadarPageLayout({ children, sidebar }: RadarPageLayoutProps) {
       <header className="sticky top-0 z-40 border-b border-border bg-card/80 backdrop-blur-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div>
+            <Link href="/" className="hover:opacity-80 transition-opacity">
               <h1 className="text-2xl font-bold text-card-foreground tracking-tight">
                 Tech Radar
               </h1>
               <p className="text-sm text-muted-foreground">
                 Herramientas Frontend - Membresías
               </p>
+            </Link>
+            <div className="flex items-center gap-3">
+              <Button
+                as={Link}
+                href="/upload"
+                color="primary"
+                variant="flat"
+                size="sm"
+              >
+                📦 Subir package.json
+              </Button>
+              <ThemeToggle />
             </div>
-            <ThemeToggle />
           </div>
         </div>
       </header>

@@ -49,6 +49,8 @@ Following chapter conventions:
 - Use fake repositories for testing use-cases
 
 ## Data Flow
+
+### Automated Flow (GitHub Actions)
 1. Product repos push changes to `package.json` or lockfile
 2. GitHub Action triggers dependency scan workflow
 3. Ingest system detects dependencies with resolved versions from lockfile
@@ -56,13 +58,33 @@ Following chapter conventions:
 5. App revalidates via `/api/revalidate` endpoint
 6. **Product list is automatically discovered** from JSON files in `radar-data/`
 
+### Manual Upload Flow (Web UI)
+1. User navigates to `/upload` page
+2. User uploads `package.json` file
+3. System detects dependencies (uses declared ranges as versions)
+4. Generated JSON is written to `radar-data/`
+5. Cache is automatically revalidated
+6. Product appears immediately in the radar
+
 ## Dependency Ingestion
-The new ingest system (`src/ingest/`) automatically detects dependencies from repositories:
+
+### Automated Ingestion (GitHub Actions)
+The ingest system (`src/ingest/`) automatically detects dependencies from repositories:
 - Reads `package.json` for declared dependencies
 - Resolves actual versions from lockfile (npm, yarn, pnpm)
 - Categorizes packages into quadrants
 - Marks new dependencies
 - See `docs/ingest-system.md` for full documentation
+
+### Manual Upload (Web UI)
+Users can upload `package.json` files directly via `/upload`:
+- **No GitHub Actions required** - Simple web upload
+- **No lockfile needed** - Uses declared ranges as versions
+- **Instant results** - Dependencies appear immediately in radar
+- **Limitation**: Shows version ranges (e.g., `^19.0.0`) instead of exact versions
+- **Use case**: Quick exploration, one-off projects, or when GitHub Actions setup is not feasible
+- Implementation: `src/ingest/application/use-cases/detectDependenciesFromContent.ts`
+- API endpoint: `/api/upload-package` handles file processing
 
 ## Dynamic Product Discovery
 **IMPORTANT**: The product list is now **automatically generated** from `radar-data/` directory:
@@ -73,3 +95,14 @@ The new ingest system (`src/ingest/`) automatically detects dependencies from re
 - Implementation: `src/radar/infrastructure/utils/getAvailableProducts.ts`
 - API endpoint: `/api/products` returns current product list
 - UI automatically updates when new products are scanned
+
+<!-- CODEGRAPH_START -->
+## CodeGraph
+
+In repositories indexed by CodeGraph (a `.codegraph/` directory exists at the repo root), reach for it BEFORE grep/find or reading files when you need to understand or locate code:
+
+- **MCP tool** (when available): `codegraph_explore` answers most code questions in one call — the relevant symbols' verbatim source plus the call paths between them, including dynamic-dispatch hops grep can't follow. Name a file or symbol in the query to read its current line-numbered source. If it's listed but deferred, load it by name via tool search.
+- **Shell** (always works): `codegraph explore "<symbol names or question>"` prints the same output.
+
+If there is no `.codegraph/` directory, skip CodeGraph entirely — indexing is the user's decision.
+<!-- CODEGRAPH_END -->
