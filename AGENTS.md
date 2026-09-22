@@ -49,6 +49,8 @@ Following chapter conventions:
 - Use fake repositories for testing use-cases
 
 ## Data Flow
+
+### Automated Flow (GitHub Actions)
 1. Product repos push changes to `package.json` or lockfile
 2. GitHub Action triggers dependency scan workflow
 3. Ingest system detects dependencies with resolved versions from lockfile
@@ -56,13 +58,33 @@ Following chapter conventions:
 5. App revalidates via `/api/revalidate` endpoint
 6. **Product list is automatically discovered** from JSON files in `radar-data/`
 
+### Manual Upload Flow (Web UI)
+1. User navigates to `/upload` page
+2. User uploads `package.json` file
+3. System detects dependencies (uses declared ranges as versions)
+4. Generated JSON is written to `radar-data/`
+5. Cache is automatically revalidated
+6. Product appears immediately in the radar
+
 ## Dependency Ingestion
-The new ingest system (`src/ingest/`) automatically detects dependencies from repositories:
+
+### Automated Ingestion (GitHub Actions)
+The ingest system (`src/ingest/`) automatically detects dependencies from repositories:
 - Reads `package.json` for declared dependencies
 - Resolves actual versions from lockfile (npm, yarn, pnpm)
 - Categorizes packages into quadrants
 - Marks new dependencies
 - See `docs/ingest-system.md` for full documentation
+
+### Manual Upload (Web UI)
+Users can upload `package.json` files directly via `/upload`:
+- **No GitHub Actions required** - Simple web upload
+- **No lockfile needed** - Uses declared ranges as versions
+- **Instant results** - Dependencies appear immediately in radar
+- **Limitation**: Shows version ranges (e.g., `^19.0.0`) instead of exact versions
+- **Use case**: Quick exploration, one-off projects, or when GitHub Actions setup is not feasible
+- Implementation: `src/ingest/application/use-cases/detectDependenciesFromContent.ts`
+- API endpoint: `/api/upload-package` handles file processing
 
 ## Dynamic Product Discovery
 **IMPORTANT**: The product list is now **automatically generated** from `radar-data/` directory:
