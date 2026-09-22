@@ -235,14 +235,25 @@ tech-radar/
 │       ├── scan-self.yml              # Mismo pipeline aplicado al propio package.json de este repo
 │       └── radar-scan.yml             # Legacy/inactivo: variante que publicaba a un repo radar-data separado
 │
+├── docs/                               # Notas/specs locales, en .gitignore (no versionado)
+│   └── EPIC-TECH-RADAR.md             # Documento de la épica
+│
+├── documentation/                     # Documentación técnica versionada (esta carpeta)
+│   ├── README.md                      # Índice de documentación
+│   ├── TECH-DOCUMENTATION.md          # Este documento
+│   ├── QUICK_START.md                 # Guía rápida del upload manual
+│   ├── upload-feature-usage.md        # Guía de uso del upload manual
+│   ├── package-upload-feature-spec.md # Spec de la feature de upload
+│   ├── ingest-system.md               # Detalle del sistema de ingesta
+│   └── example-package.json           # package.json de ejemplo para /upload
+│
 ├── public/                            # Assets estáticos
 ├── package.json
 ├── tsconfig.json
 ├── vitest.config.ts
 ├── tailwind.config.ts
 ├── next.config.ts
-├── AGENTS.md                          # Documentación para agentes/devs
-└── EPIC-TECH-RADAR.md                 # Documento de la épica
+└── AGENTS.md                          # Documentación para agentes/devs
 ```
 
 ---
@@ -925,7 +936,7 @@ jobs:
 - [HeroUI Documentation](https://heroui.com/docs)
 - [Clean Architecture (Robert C. Martin)](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 - [ThoughtWorks Tech Radar](https://www.thoughtworks.com/radar)
-- Ver también: `docs/ingest-system.md` (detalle del sistema de ingesta) y `docs/upload-feature-usage.md` (detalle del upload manual)
+- Ver también: `documentation/ingest-system.md` (detalle del sistema de ingesta) y `documentation/upload-feature-usage.md` (detalle del upload manual)
 
 ### Repositorios
 - **tech-radar:** Aplicación Next.js (este proyecto), incluye `radar-data/` con el JSON versionado (ya no un repo separado)

@@ -16,6 +16,8 @@ Tech Radar para herramientas Frontend utilizadas por el chapter de Membresías. 
 
 ### Instalación
 
+Requiere Node 20 (pinneado en `.nvmrc`).
+
 ```bash
 npm install
 ```
@@ -56,7 +58,7 @@ La forma más rápida de agregar dependencias:
 **Limitación:**
 - ⚠️ Muestra rangos de versiones (ej: `^19.0.0`) en lugar de versiones exactas
 
-Ver [guía de uso detallada](./docs/upload-feature-usage.md).
+Ver [guía de uso detallada](./documentation/upload-feature-usage.md).
 
 ### Opción 2: GitHub Actions (Recomendado para Producción)
 
@@ -86,7 +88,7 @@ jobs:
 - ✅ Versiones exactas desde lockfile
 - ✅ Integración con CI/CD
 
-Ver [documentación de GitHub Actions](./docs/ingest-system.md#github-actions).
+Ver [documentación de GitHub Actions](./documentation/ingest-system.md#github-actions).
 
 ## 🏗️ Arquitectura
 
@@ -146,7 +148,9 @@ npm run lint
 | `npm run test:run` | Tests una sola vez |
 | `npm run typecheck` | Verificación de tipos TypeScript |
 | `npm run lint` | Linting con ESLint |
-| `npm run ingest` | Detectar e ingerir dependencias |
+| `npm run format` | Formatea `src/**/*.{ts,tsx}` con Prettier |
+| `npm run test:coverage` | Tests con reporte de cobertura |
+| `npm run ingest` | Detectar e ingerir dependencias (lockfile de un repo → `radar-data/<producto>.json`) |
 
 ## 🎨 Categorización de Dependencias
 
@@ -165,9 +169,10 @@ Para agregar nuevas categorizaciones, edita `src/core/config/categorization-map.
 
 - [Documentación Técnica Completa](./documentation/TECH-DOCUMENTATION.md) — arquitectura, stack, flujos de datos, modelo de dominio, estado actual
 - [Índice de Documentación](./documentation/README.md)
-- [Especificación de Upload Feature](./docs/package-upload-feature-spec.md)
-- [Guía de Uso de Upload](./docs/upload-feature-usage.md)
-- [Sistema de Ingestión](./docs/ingest-system.md)
+- [Quick Start de Upload Manual](./documentation/QUICK_START.md)
+- [Especificación de Upload Feature](./documentation/package-upload-feature-spec.md)
+- [Guía de Uso de Upload](./documentation/upload-feature-usage.md)
+- [Sistema de Ingestión](./documentation/ingest-system.md)
 - [Reglas del Proyecto](./AGENTS.md)
 
 ## 🔧 Tecnologías
@@ -188,18 +193,18 @@ Para agregar nuevas categorizaciones, edita `src/core/config/categorization-map.
 
 ## 📝 Ejemplo de Uso
 
-Un archivo `example-package.json` está incluido para pruebas:
+Un archivo de ejemplo está incluido en [`documentation/example-package.json`](./documentation/example-package.json) para pruebas:
 
 ```bash
 # Navega a http://localhost:3000/upload
-# Sube example-package.json
+# Sube documentation/example-package.json
 # Nombre del producto: example-app
 # ¡Explora las dependencias en el radar!
 ```
 
 ## 🐛 Solución de Problemas
 
-Ver [guía de solución de problemas](./docs/upload-feature-usage.md#-solución-de-problemas).
+Ver [guía de solución de problemas](./documentation/upload-feature-usage.md#-solución-de-problemas).
 
 ## 📄 Licencia
 

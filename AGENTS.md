@@ -21,7 +21,7 @@ Tech Radar for Frontend tools used by the Membresías chapter. Built with Clean 
 - `npm run typecheck` - TypeScript type checking
 - `npm run lint` - ESLint
 - `npm run scan` - (Legacy) Scan dependencies from a package.json
-- `npm run ingest` - Detect and ingest dependencies (new system, see docs/ingest-system.md)
+- `npm run ingest` - Detect and ingest dependencies (new system, see documentation/ingest-system.md)
 
 ## Architecture
 This project follows Clean Architecture with the following layers:
@@ -74,7 +74,7 @@ The ingest system (`src/ingest/`) automatically detects dependencies from reposi
 - Resolves actual versions from lockfile (npm, yarn, pnpm)
 - Categorizes packages into quadrants
 - Marks new dependencies
-- See `docs/ingest-system.md` for full documentation
+- See `documentation/ingest-system.md` for full documentation
 
 ### Manual Upload (Web UI)
 Users can upload `package.json` files directly via `/upload`:
