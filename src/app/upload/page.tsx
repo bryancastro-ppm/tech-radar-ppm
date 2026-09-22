@@ -28,13 +28,13 @@ export default function UploadPage() {
             Subir Dependencias al Tech Radar
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Sube tu archivo <code className="px-2 py-1 bg-muted rounded text-sm">package.json</code> 
+            Sube tu archivo <code className="px-2 py-1 bg-muted rounded text-sm">package.json</code>
             {' '}para detectar automáticamente las dependencias de tu proyecto y agregarlas al radar.
           </p>
         </div>
 
         {/* Content */}
-        {result && result.success ? (
+        {result?.success ? (
           <UploadResultDisplay
             result={{
               product: result.product!,
@@ -68,9 +68,9 @@ export default function UploadPage() {
                 ⚠️ Limitación conocida
               </h3>
               <p className="text-sm text-yellow-600 dark:text-yellow-400">
-                Al subir solo el package.json (sin lockfile), las versiones mostradas serán los 
-                rangos declarados (ej: ^19.0.0) en lugar de versiones exactas (ej: 19.0.2). 
-                Para mayor precisión, considera usar el sistema de GitHub Actions que incluye 
+                Al subir solo el package.json (sin lockfile), las versiones mostradas serán los
+                rangos declarados (ej: ^19.0.0) en lugar de versiones exactas (ej: 19.0.2).
+                Para mayor precisión, considera usar el sistema de GitHub Actions que incluye
                 el lockfile.
               </p>
             </div>
@@ -80,7 +80,7 @@ export default function UploadPage() {
                 💡 ¿Prefieres automatización?
               </h3>
               <p className="text-sm text-blue-600 dark:text-blue-400 mb-2">
-                Si tu proyecto está en GitHub, puedes configurar un workflow que actualice 
+                Si tu proyecto está en GitHub, puedes configurar un workflow que actualice
                 automáticamente el radar cada vez que cambien tus dependencias.
               </p>
               <a
