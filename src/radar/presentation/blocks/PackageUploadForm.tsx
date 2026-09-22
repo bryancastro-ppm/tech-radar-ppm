@@ -1,15 +1,14 @@
 'use client';
 
-import { useState, useCallback, type DragEvent, type ChangeEvent } from 'react';
-import { Button } from '@heroui/react';
-import { Input } from '@heroui/react';
-import { Card, CardBody, CardHeader } from '@heroui/react';
+import { useState, useCallback, useEffect, type DragEvent, type ChangeEvent } from 'react';
+import { Card, CardBody, CardHeader, Input, Button } from '@heroui/react';
 
 export interface UploadResult {
   success: boolean;
   product?: string;
   dependenciesDetected?: number;
   newDependencies?: number;
+  uncategorizedCount?: number;
   filePath?: string;
   error?: string;
   details?: string;
@@ -20,7 +19,7 @@ interface PackageUploadFormProps {
   onError?: (error: string) => void;
 }
 
-export function PackageUploadForm({ onSuccess, onError }: PackageUploadFormProps) {
+export function PackageUploadForm({ onSuccess, onError }: Readonly<PackageUploadFormProps>) {
   const [file, setFile] = useState<File | null>(null);
   const [productName, setProductName] = useState('');
   const [repository, setRepository] = useState('');
@@ -28,6 +27,18 @@ export function PackageUploadForm({ onSuccess, onError }: PackageUploadFormProps
   const [isDragging, setIsDragging] = useState(false);
   const [filePreview, setFilePreview] = useState<string | null>(null);
   const [validationError, setValidationError] = useState<string | null>(null);
+  const [existingProductIds, setExistingProductIds] = useState<Set<string>>(new Set());
+
+  useEffect(() => {
+    fetch('/api/products')
+      .then((res) => (res.ok ? res.json() : []))
+      .then((products: Array<{ id: string }>) =>
+        setExistingProductIds(new Set(products.map((p) => p.id))),
+      )
+      .catch(() => {
+        // Non-blocking: worst case the "product already exists" hint doesn't show.
+      });
+  }, []);
 
   const validateFile = useCallback((file: File): string | null => {
     if (!file.name.endsWith('.json')) {
@@ -56,6 +67,16 @@ export function PackageUploadForm({ onSuccess, onError }: PackageUploadFormProps
       try {
         const content = await selectedFile.text();
         const parsed = JSON.parse(content);
+
+        const depsCount = Object.keys(parsed.dependencies ?? {}).length;
+        const devDepsCount = Object.keys(parsed.devDependencies ?? {}).length;
+        if (depsCount + devDepsCount === 0) {
+          setValidationError('El package.json no tiene "dependencies" ni "devDependencies"');
+          setFile(null);
+          setFilePreview(null);
+          return;
+        }
+
         const preview = JSON.stringify(parsed, null, 2);
         setFilePreview(preview.length > 500 ? preview.slice(0, 500) + '\n...' : preview);
       } catch {
@@ -227,6 +248,14 @@ export function PackageUploadForm({ onSuccess, onError }: PackageUploadFormProps
             variant="bordered"
           />
 
+          {/* Existing Product Hint */}
+          {productName && existingProductIds.has(productName) && (
+            <div className="p-3 rounded-lg bg-primary/10 border border-primary text-primary text-sm">
+              Ya existe un producto llamado <strong>{productName}</strong> en el radar. Subir
+              este archivo actualizará sus dependencias.
+            </div>
+          )}
+
           {/* Repository Input */}
           <Input
             label="Repositorio"
@@ -239,7 +268,10 @@ export function PackageUploadForm({ onSuccess, onError }: PackageUploadFormProps
 
           {/* Validation Error */}
           {validationError && (
-            <div className="p-3 rounded-lg bg-danger/10 border border-danger text-danger text-sm">
+            <div
+              role="alert"
+              className="p-3 rounded-lg bg-danger/10 border border-danger text-danger text-sm"
+            >
               {validationError}
             </div>
           )}
@@ -257,7 +289,7 @@ export function PackageUploadForm({ onSuccess, onError }: PackageUploadFormProps
               color="primary"
               onPress={handleSubmit}
               isLoading={isUploading}
-              isDisabled={!file || !productName}
+              isDisabled={!file || !productName || isUploading}
             >
               {isUploading ? 'Procesando...' : 'Analizar Dependencias'}
             </Button>

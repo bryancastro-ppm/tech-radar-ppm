@@ -14,6 +14,7 @@ interface UploadResponse {
   product?: string;
   dependenciesDetected?: number;
   newDependencies?: number;
+  uncategorizedCount?: number;
   filePath?: string;
   error?: string;
   details?: string;
@@ -123,7 +124,8 @@ export async function POST(request: Request): Promise<NextResponse<UploadRespons
     // Step 4: Mark new entries
     const entries = markNewEntries(withoutFlag, previous);
     const newCount = entries.filter((e) => e.isNew).length;
-    console.log(`[Upload] Marked ${newCount} as new`);
+    const uncategorizedCount = entries.filter((e) => e.quadrant === 'sin-categorizar').length;
+    console.log(`[Upload] Marked ${newCount} as new, ${uncategorizedCount} uncategorized`);
 
     // Step 5: Write to radar-data
     await writeRadarJson(productName, entries, outputDir);
@@ -139,6 +141,7 @@ export async function POST(request: Request): Promise<NextResponse<UploadRespons
       product: productName,
       dependenciesDetected: detected.length,
       newDependencies: newCount,
+      uncategorizedCount,
       filePath,
     });
   } catch (error) {

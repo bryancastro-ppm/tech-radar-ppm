@@ -9,6 +9,7 @@ interface UploadResultDisplayProps {
     product: string;
     dependenciesDetected: number;
     newDependencies: number;
+    uncategorizedCount: number;
     filePath: string;
   };
   onUploadAnother?: () => void;
@@ -58,6 +59,15 @@ export function UploadResultDisplay({ result, onUploadAnother }: UploadResultDis
               </div>
             )}
 
+            {result.uncategorizedCount > 0 && (
+              <div className="flex items-center justify-between p-3 rounded-lg bg-warning/10 border border-warning">
+                <span className="text-sm font-medium text-warning">🏷️ Sin categorizar:</span>
+                <span className="font-semibold text-lg text-warning">
+                  {result.uncategorizedCount}
+                </span>
+              </div>
+            )}
+
             <div className="flex items-center justify-between p-3 rounded-lg bg-muted">
               <span className="text-sm font-medium text-muted-foreground">
                 Archivo generado:
@@ -76,6 +86,17 @@ export function UploadResultDisplay({ result, onUploadAnother }: UploadResultDis
               sistema de GitHub Actions con lockfile.
             </p>
           </div>
+
+          {result.uncategorizedCount > 0 && (
+            <div className="p-4 rounded-lg bg-warning/10 border border-warning/30 text-sm">
+              <p className="text-warning">
+                <strong>Nota:</strong> {result.uncategorizedCount}{' '}
+                {result.uncategorizedCount === 1 ? 'dependencia cayó' : 'dependencias cayeron'} en
+                &quot;Sin Categorizar&quot;. Para clasificarlas, agrégalas a{' '}
+                <code className="text-xs">src/core/config/categorization-map.ts</code>.
+              </p>
+            </div>
+          )}
 
           {/* Actions */}
           <div className="flex gap-3 justify-end pt-4 border-t border-border">

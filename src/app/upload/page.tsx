@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { PackageUploadForm, type UploadResult } from '@/radar/presentation/blocks/PackageUploadForm';
 import { UploadResultDisplay } from '@/radar/presentation/blocks/UploadResultDisplay';
+import { RadarPageLayout } from '@/radar/presentation/layouts/RadarPageLayout';
 
 export default function UploadPage() {
   const [result, setResult] = useState<UploadResult | null>(null);
@@ -20,8 +21,8 @@ export default function UploadPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-12">
+    <RadarPageLayout>
+      <div className="py-4">
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold mb-4">
@@ -40,6 +41,7 @@ export default function UploadPage() {
               product: result.product!,
               dependenciesDetected: result.dependenciesDetected!,
               newDependencies: result.newDependencies!,
+              uncategorizedCount: result.uncategorizedCount ?? 0,
               filePath: result.filePath!,
             }}
             onUploadAnother={handleUploadAnother}
@@ -95,6 +97,6 @@ export default function UploadPage() {
           </div>
         )}
       </div>
-    </div>
+    </RadarPageLayout>
   );
 }
