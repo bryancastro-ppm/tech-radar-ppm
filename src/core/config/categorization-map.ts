@@ -17,6 +17,9 @@ export const categorizationMap: Record<string, Quadrant> = {
   'date-fns': 'frameworks-librerias',
   dayjs: 'frameworks-librerias',
   moment: 'frameworks-librerias',
+  '@material-ui/core': 'frameworks-librerias',
+  '@material-ui/icons': 'frameworks-librerias',
+  'react-router-dom': 'frameworks-librerias',
 
   // Gestión de Estado
   zustand: 'gestion-de-estado',
@@ -78,6 +81,7 @@ export const categorizationMap: Record<string, Quadrant> = {
   '@types/node': 'build-tools',
   '@types/react': 'build-tools',
   '@types/react-dom': 'build-tools',
+  'react-scripts': 'build-tools',
 };
 
 export function categorizePackage(packageName: string): Quadrant {
