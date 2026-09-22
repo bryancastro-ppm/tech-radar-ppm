@@ -2,7 +2,7 @@
   {
     "name": "@material-ui/core",
     "version": "4.12.4",
-    "quadrant": "sin-categorizar",
+    "quadrant": "frameworks-librerias",
     "ring": "adopt",
     "product": "todo-app",
     "repository": "bryancastro-ppm/todo-app",
@@ -11,7 +11,7 @@
   {
     "name": "@material-ui/icons",
     "version": "4.9.1",
-    "quadrant": "sin-categorizar",
+    "quadrant": "frameworks-librerias",
     "ring": "adopt",
     "product": "todo-app",
     "repository": "bryancastro-ppm/todo-app",
@@ -83,7 +83,7 @@
   {
     "name": "react-router-dom",
     "version": "5.2.0",
-    "quadrant": "sin-categorizar",
+    "quadrant": "frameworks-librerias",
     "ring": "adopt",
     "product": "todo-app",
     "repository": "bryancastro-ppm/todo-app",
@@ -92,7 +92,7 @@
   {
     "name": "react-scripts",
     "version": "3.4.1",
-    "quadrant": "sin-categorizar",
+    "quadrant": "build-tools",
     "ring": "adopt",
     "product": "todo-app",
     "repository": "bryancastro-ppm/todo-app",

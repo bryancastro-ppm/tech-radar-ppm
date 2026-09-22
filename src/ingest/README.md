@@ -77,4 +77,4 @@ npm run test:run -- __tests__/ingest
 
 ## Documentation
 
-See [docs/ingest-system.md](../../docs/ingest-system.md) for complete documentation.
+See [documentation/ingest-system.md](../../documentation/ingest-system.md) for complete documentation.

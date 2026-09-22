@@ -27,7 +27,7 @@ http://localhost:3000/upload
 Hay un archivo de ejemplo listo para usar:
 
 ```bash
-# El archivo example-package.json está en la raíz del proyecto
+# El archivo documentation/example-package.json está incluido en el repo
 # Súbelo con el nombre: example-app
 ```
 
@@ -61,8 +61,8 @@ Esto es suficiente para exploración, pero para producción considera usar GitHu
 
 ## 🔗 Más Información
 
-- **Guía completa**: [docs/upload-feature-usage.md](./docs/upload-feature-usage.md)
-- **Especificación técnica**: [docs/package-upload-feature-spec.md](./docs/package-upload-feature-spec.md)
+- **Guía completa**: [upload-feature-usage.md](./upload-feature-usage.md)
+- **Especificación técnica**: [package-upload-feature-spec.md](./package-upload-feature-spec.md)
 - **Verificación**: [VERIFICATION_CHECKLIST.md](./VERIFICATION_CHECKLIST.md)
 - **Resumen de implementación**: [IMPLEMENTATION_SUMMARY.md](./IMPLEMENTATION_SUMMARY.md)
 
@@ -140,4 +140,4 @@ Producto: mi-aplicacion
 
 ---
 
-**¿Preguntas?** Revisa la [documentación completa](./docs/upload-feature-usage.md)
+**¿Preguntas?** Revisa la [documentación completa](./upload-feature-usage.md)
