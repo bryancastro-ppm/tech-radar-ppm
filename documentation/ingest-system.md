@@ -1,78 +1,78 @@
-# Dependency Ingestion System
+# Sistema de Ingesta de Dependencias
 
-## Overview
+## Resumen
 
-The dependency ingestion system automatically detects, parses, and normalizes dependencies from repositories, making them available to the Tech Radar. This implementation follows Clean Architecture principles and is designed to be extensible and maintainable.
+El sistema de ingesta de dependencias detecta, parsea y normaliza automáticamente las dependencias de los repositorios, dejándolas disponibles para el Tech Radar. Esta implementación sigue los principios de Clean Architecture y está diseñada para ser extensible y mantenible.
 
-## Architecture
+## Arquitectura
 
-The system is organized into three main layers:
+El sistema se organiza en tres capas principales:
 
 ### Domain Layer (`src/ingest/domain/`)
-- **DetectedDependency**: Pure domain entity representing a dependency with its declared range and resolved version
+- **DetectedDependency**: Entidad de dominio pura que representa una dependencia con su rango declarado y su versión resuelta
 
 ### Application Layer (`src/ingest/application/use-cases/`)
-- **detectDependencies**: Orchestrates the detection process
-- **toRadarEntries**: Converts detected dependencies to radar entries
-- **markNewEntries**: Marks new dependencies by comparing with previous scans
+- **detectDependencies**: Orquesta el proceso de detección
+- **toRadarEntries**: Convierte las dependencias detectadas en entradas del radar
+- **markNewEntries**: Marca dependencias nuevas comparando con escaneos anteriores
 
 ### Infrastructure Layer (`src/ingest/infrastructure/`)
-- **Parsers**: Read and parse lockfiles (npm, yarn, pnpm)
-- **PackageJsonReader**: Reads package.json manifests
-- **Output**: Writes radar data and fetches previous entries
+- **Parsers**: Leen y parsean lockfiles (npm, yarn, pnpm)
+- **PackageJsonReader**: Lee manifiestos package.json
+- **Output**: Escribe datos del radar y obtiene entradas previas
 
-## What Gets Detected
+## Qué se Detecta
 
-The system detects **only direct dependencies** (both `dependencies` and `devDependencies` from package.json). Transitive dependencies are intentionally excluded to avoid noise.
+El sistema detecta **solo dependencias directas** (tanto `dependencies` como `devDependencies` del package.json). Las dependencias transitivas se excluyen intencionalmente para evitar ruido.
 
-### Version Resolution
+### Resolución de Versiones
 
-- **Declared Range**: The version range from package.json (e.g., `^19.0.0`)
-- **Resolved Version**: The actual installed version from the lockfile (e.g., `19.0.2`)
-- The radar displays the **resolved version** since that's what runs in production
+- **Rango Declarado**: El rango de versión del package.json (ej: `^19.0.0`)
+- **Versión Resuelta**: La versión realmente instalada según el lockfile (ej: `19.0.2`)
+- El radar muestra la **versión resuelta**, ya que es la que corre en producción
 
-## Supported Package Managers
+## Package Managers Soportados
 
-Currently supported:
+Actualmente soportados:
 - ✅ **npm** (lockfileVersion 3, npm >= 7)
 
-Planned (stubs in place):
-- ⏳ **yarn** (not implemented yet)
-- ⏳ **pnpm** (not implemented yet)
+Planeados (stubs ya creados):
+- ⏳ **yarn** (aún no implementado)
+- ⏳ **pnpm** (aún no implementado)
 
-## Usage
+## Uso
 
-### Local Development
+### Desarrollo Local
 
-Scan the current repository:
+Escanear el repositorio actual:
 
 ```bash
 PRODUCT_NAME=tech-radar GITHUB_REPOSITORY=tech-radar npm run ingest
 ```
 
-Scan a different repository:
+Escanear un repositorio diferente:
 
 ```bash
 REPO_PATH=/path/to/repo PRODUCT_NAME=my-product GITHUB_REPOSITORY=my-repo npm run ingest
 ```
 
-### Environment Variables
+### Variables de Entorno
 
-- `REPO_PATH`: Path to the repository to scan (default: current directory)
-- `PRODUCT_NAME`: Name of the product (required)
-- `GITHUB_REPOSITORY`: GitHub repository name (required)
-- `OUTPUT_DIR`: Output directory for radar data (default: `./radar-data`)
+- `REPO_PATH`: Ruta al repositorio a escanear (default: directorio actual)
+- `PRODUCT_NAME`: Nombre del producto (requerido)
+- `GITHUB_REPOSITORY`: Nombre del repositorio de GitHub (requerido)
+- `OUTPUT_DIR`: Directorio de salida para los datos del radar (default: `./radar-data`)
 
 ### GitHub Actions
 
-The system includes two workflows:
+El sistema incluye dos workflows:
 
-#### 1. Reusable Workflow (`scan-dependencies.yml`)
+#### 1. Workflow Reusable (`scan-dependencies.yml`)
 
-Can be called from product repositories to automatically scan and publish dependencies:
+Puede llamarse desde repositorios de producto para escanear y publicar dependencias automáticamente:
 
 ```yaml
-# In product repo: .github/workflows/radar-scan.yml
+# En el repo del producto: .github/workflows/radar-scan.yml
 name: Radar Scan
 on:
   push:
@@ -87,26 +87,26 @@ jobs:
       RADAR_DATA_PUSH_TOKEN: ${{ secrets.RADAR_DATA_PUSH_TOKEN }}
 ```
 
-#### 2. Self-Scan Workflow (`scan-self.yml`)
+#### 2. Workflow de Auto-Escaneo (`scan-self.yml`)
 
-Automatically scans the tech-radar repository itself when dependencies change.
+Escanea automáticamente el propio repositorio tech-radar cuando cambian sus dependencias.
 
-## Categorization
+## Categorización
 
-Dependencies are automatically categorized into quadrants using the categorization map at `src/core/config/categorization-map.ts`.
+Las dependencias se categorizan automáticamente en cuadrantes usando el mapa de categorización en `src/core/config/categorization-map.ts`.
 
-### Quadrants
+### Cuadrantes
 
 - `frameworks-librerias`: React, Next.js, Vue, etc.
 - `gestion-de-estado`: Zustand, Redux, React Query, etc.
 - `testing`: Vitest, Jest, Testing Library, etc.
 - `estilos-ui`: Tailwind, PostCSS, styled-components, etc.
 - `build-tools`: TypeScript, ESLint, Vite, etc.
-- `sin-categorizar`: Uncategorized (needs manual classification)
+- `sin-categorizar`: Sin categorizar (necesita clasificación manual)
 
-### Adding New Categories
+### Agregar Nuevas Categorías
 
-Edit `src/core/config/categorization-map.ts`:
+Editar `src/core/config/categorization-map.ts`:
 
 ```typescript
 export const categorizationMap: Record<string, Quadrant> = {
@@ -115,73 +115,73 @@ export const categorizationMap: Record<string, Quadrant> = {
 };
 ```
 
-The CLI will warn about uncategorized dependencies after each scan.
+El CLI advertirá sobre dependencias sin categorizar después de cada escaneo.
 
-## New Dependency Detection
+## Detección de Dependencias Nuevas
 
-The system tracks which dependencies are new by comparing against the previous scan:
+El sistema rastrea qué dependencias son nuevas comparando contra el escaneo anterior:
 
-1. First scan: All dependencies marked as `isNew: true`
-2. Subsequent scans: Only newly added packages marked as `isNew: true`
-3. Version updates: Same package with different version is NOT marked as new
+1. Primer escaneo: todas las dependencias se marcan como `isNew: true`
+2. Escaneos siguientes: solo los paquetes recién agregados se marcan como `isNew: true`
+3. Actualizaciones de versión: el mismo paquete con distinta versión NO se marca como nuevo
 
-## Error Handling
+## Manejo de Errores
 
-| Scenario | Behavior |
+| Escenario | Comportamiento |
 |----------|----------|
-| Lockfile missing | Job fails explicitly with error message |
-| Unsupported lockfile (yarn/pnpm) | Throws `UnsupportedLockfileError` |
-| Package in package.json but not in lockfile | Uses declared range as fallback + warning |
-| No changes in dependencies | Skips git commit (no-op) |
+| Falta el lockfile | El job falla explícitamente con un mensaje de error |
+| Lockfile no soportado (yarn/pnpm) | Lanza `UnsupportedLockfileError` |
+| Paquete en package.json pero no en el lockfile | Usa el rango declarado como fallback + warning |
+| Sin cambios en las dependencias | Omite el commit de git (no-op) |
 
 ## Testing
 
-Run tests:
+Ejecutar los tests:
 
 ```bash
 npm run test:run -- __tests__/ingest
 ```
 
-Test coverage includes:
-- Lockfile detection
-- Version resolution from npm lockfile
-- Dependency detection with fixtures
-- Radar entry conversion
-- New entry marking logic
+La cobertura de tests incluye:
+- Detección de lockfile
+- Resolución de versiones desde el lockfile de npm
+- Detección de dependencias con fixtures
+- Conversión a radar entries
+- Lógica de marcado de nuevas entradas
 
-### Test Fixtures
+### Fixtures de Test
 
-Located at `__tests__/ingest/fixtures/sample-repo/`:
-- `package.json`: Sample manifest
-- `package-lock.json`: Sample lockfile (npm v3)
+Ubicados en `__tests__/ingest/fixtures/sample-repo/`:
+- `package.json`: Manifiesto de ejemplo
+- `package-lock.json`: Lockfile de ejemplo (npm v3)
 
-## File Structure
+## Estructura de Archivos
 
 ```
 src/ingest/
 ├── domain/
-│   └── DetectedDependency.ts          # Domain entity
+│   └── DetectedDependency.ts          # Entidad de dominio
 ├── application/
 │   └── use-cases/
-│       ├── detectDependencies.ts      # Main detection logic
-│       ├── toRadarEntries.ts          # Conversion to radar format
-│       └── markNewEntries.ts          # New dependency detection
+│       ├── detectDependencies.ts      # Lógica principal de detección
+│       ├── toRadarEntries.ts          # Conversión al formato del radar
+│       └── markNewEntries.ts          # Detección de dependencias nuevas
 ├── infrastructure/
 │   ├── parsers/
-│   │   ├── LockfileDetector.ts        # Detects lockfile type
-│   │   ├── NpmLockParser.ts           # npm lockfile parser
-│   │   ├── YarnLockParser.ts          # Stub for yarn
-│   │   └── PnpmLockParser.ts          # Stub for pnpm
-│   ├── PackageJsonReader.ts           # Reads package.json
+│   │   ├── LockfileDetector.ts        # Detecta el tipo de lockfile
+│   │   ├── NpmLockParser.ts           # Parser de lockfile de npm
+│   │   ├── YarnLockParser.ts          # Stub para yarn
+│   │   └── PnpmLockParser.ts          # Stub para pnpm
+│   ├── PackageJsonReader.ts           # Lee el package.json
 │   └── output/
-│       ├── writeRadarJson.ts          # Writes radar data
-│       └── fetchPreviousEntries.ts    # Fetches previous scan
-└── index.ts                            # CLI entry point
+│       ├── writeRadarJson.ts          # Escribe los datos del radar
+│       └── fetchPreviousEntries.ts    # Obtiene el escaneo anterior
+└── index.ts                            # Entry point del CLI
 ```
 
-## Output Format
+## Formato de Salida
 
-Generated files are stored in `radar-data/<product>.json`:
+Los archivos generados se guardan en `radar-data/<product>.json`:
 
 ```json
 [
@@ -197,37 +197,38 @@ Generated files are stored in `radar-data/<product>.json`:
 ]
 ```
 
-## Future Enhancements
+## Mejoras Futuras
 
-- [ ] Implement yarn lockfile parser
-- [ ] Implement pnpm lockfile parser
-- [ ] Support for monorepos (detect multiple package.json files)
-- [ ] Configurable ring assignment (currently all dependencies are "adopt")
-- [ ] Dependency change notifications (Slack, email, etc.)
-- [ ] Historical tracking of dependency versions over time
+- [ ] Implementar parser de lockfile de yarn
+- [ ] Implementar parser de lockfile de pnpm
+- [ ] Soporte para monorepos (detectar múltiples archivos package.json)
+- [ ] Asignación configurable de ring (actualmente todas las dependencias son "adopt")
+- [ ] Notificaciones de cambios de dependencias (Slack, email, etc.)
+- [ ] Historial de versiones de dependencias a lo largo del tiempo
 
-## Troubleshooting
+## Solución de Problemas
 
 ### "Lockfile de tipo 'unknown' no soportado todavía"
 
-The repository doesn't have a package-lock.json file. Either:
-1. Run `npm install` to generate one
-2. The repo uses yarn/pnpm (not supported yet)
+El repositorio no tiene un archivo package-lock.json. Puedes:
+1. Ejecutar `npm install` para generar uno
+2. Si el repo usa yarn/pnpm (aún no soportado)
 
 ### "Package not found in lockfile"
 
-A package is declared in package.json but not resolved in the lockfile. This can happen with:
-- npm overrides
+Un paquete está declarado en package.json pero no resuelto en el lockfile. Esto puede pasar por:
+- Overrides de npm
 - Peer dependencies
-- Corrupted lockfile
+- Lockfile corrupto
 
-Solution: Run `npm install` to regenerate the lockfile.
+Solución: ejecutar `npm install` para regenerar el lockfile.
 
-### Uncategorized dependencies
+### Dependencias sin categorizar
 
-The CLI will list packages that need categorization. Add them to `src/core/config/categorization-map.ts`.
+El CLI listará los paquetes que necesitan categorización. Agrégalos a `src/core/config/categorization-map.ts`.
 
-## Related Documentation
+## Documentación Relacionada
 
-- [TECH-DOCUMENTATION.md](./TECH-DOCUMENTATION.md) - Full technical documentation (architecture, data flow, domain model)
-- [AGENTS.md](../AGENTS.md) - Project rules and conventions
+- [TECH-DOCUMENTATION.md](./TECH-DOCUMENTATION.md) - Documentación técnica completa (arquitectura, flujo de datos, modelo de dominio)
+- [AGENTS.md](../AGENTS.md) - Reglas y convenciones del proyecto
+</content>
