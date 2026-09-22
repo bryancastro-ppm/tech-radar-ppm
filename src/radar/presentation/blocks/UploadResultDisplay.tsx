@@ -1,7 +1,6 @@
 'use client';
 
-import { Button } from '@heroui/react';
-import { Card, CardBody, CardHeader } from '@heroui/react';
+import { Card, CardBody, CardHeader, Button } from '@heroui/react';
 import { useRouter } from 'next/navigation';
 
 interface UploadResultDisplayProps {
@@ -15,7 +14,7 @@ interface UploadResultDisplayProps {
   onUploadAnother?: () => void;
 }
 
-export function UploadResultDisplay({ result, onUploadAnother }: UploadResultDisplayProps) {
+export function UploadResultDisplay({ result, onUploadAnother }: Readonly<UploadResultDisplayProps>) {
   const router = useRouter();
 
   const handleViewRadar = () => {

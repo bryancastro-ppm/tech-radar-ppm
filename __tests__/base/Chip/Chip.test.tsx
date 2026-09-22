@@ -8,18 +8,18 @@ describe('Chip', () => {
     expect(screen.getByText('Test Label')).toBeInTheDocument();
   });
 
-  it('renders with frameworks-librerias quadrant', () => {
-    render(<Chip quadrant="frameworks-librerias">Frameworks</Chip>);
+  it('renders with a given color', () => {
+    render(<Chip color="primary">Frameworks</Chip>);
     expect(screen.getByText('Frameworks')).toBeInTheDocument();
   });
 
-  it('renders with testing quadrant', () => {
-    render(<Chip quadrant="testing">Testing</Chip>);
+  it('renders with success color', () => {
+    render(<Chip color="success">Testing</Chip>);
     expect(screen.getByText('Testing')).toBeInTheDocument();
   });
 
-  it('renders with sin-categorizar quadrant', () => {
-    render(<Chip quadrant="sin-categorizar">Sin Categorizar</Chip>);
+  it('renders with default color', () => {
+    render(<Chip color="default">Sin Categorizar</Chip>);
     expect(screen.getByText('Sin Categorizar')).toBeInTheDocument();
   });
 

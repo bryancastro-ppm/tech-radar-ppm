@@ -8,23 +8,23 @@ describe('Badge', () => {
     expect(screen.getByText('5')).toBeInTheDocument();
   });
 
-  it('renders with adopt ring (default)', () => {
-    const { container } = render(<Badge><span>Test</span></Badge>);
+  it('renders with a given color', () => {
+    const { container } = render(<Badge color="success"><span>Adopt</span></Badge>);
     expect(container.firstChild).toBeInTheDocument();
   });
 
-  it('renders with trial ring', () => {
-    const { container } = render(<Badge ring="trial"><span>Trial</span></Badge>);
+  it('renders with primary color', () => {
+    const { container } = render(<Badge color="primary"><span>Trial</span></Badge>);
     expect(container.firstChild).toBeInTheDocument();
   });
 
-  it('renders with assess ring', () => {
-    const { container } = render(<Badge ring="assess"><span>Assess</span></Badge>);
+  it('renders with warning color', () => {
+    const { container } = render(<Badge color="warning"><span>Assess</span></Badge>);
     expect(container.firstChild).toBeInTheDocument();
   });
 
-  it('renders with hold ring', () => {
-    const { container } = render(<Badge ring="hold"><span>Hold</span></Badge>);
+  it('renders with danger color', () => {
+    const { container } = render(<Badge color="danger"><span>Hold</span></Badge>);
     expect(container.firstChild).toBeInTheDocument();
   });
 
