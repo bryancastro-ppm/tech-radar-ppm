@@ -2,6 +2,12 @@
 
 Tech Radar para herramientas Frontend utilizadas por el chapter de Membresías. Construido con Clean Architecture y Next.js.
 
+[![Herramientas](https://img.shields.io/badge/herramientas-52-blue)](./metrics/METRICAS_TECH_RADAR.md)
+[![Productos](https://img.shields.io/badge/productos-3-green)](./metrics/DASHBOARD_METRICAS.md)
+[![Desarrollo](https://img.shields.io/badge/desarrollo-4%20martes-orange)](./metrics/METRICAS_TECH_RADAR.md)
+
+> 📊 **[Ver Métricas](./metrics/)** — Análisis completo del proyecto
+
 ## 🎯 Características
 
 - 📊 **Visualización interactiva** de dependencias en formato radar
@@ -167,13 +173,18 @@ Para agregar nuevas categorizaciones, edita `src/core/config/categorization-map.
 
 ## 📖 Documentación
 
-- [Documentación Técnica Completa](./documentation/TECH-DOCUMENTATION.md) — arquitectura, stack, flujos de datos, modelo de dominio, estado actual
-- [Índice de Documentación](./documentation/README.md)
-- [Quick Start de Upload Manual](./documentation/QUICK_START.md)
-- [Especificación de Upload Feature](./documentation/package-upload-feature-spec.md)
-- [Guía de Uso de Upload](./documentation/upload-feature-usage.md)
-- [Sistema de Ingestión](./documentation/ingest-system.md)
+### Documentación Técnica
+- [Documentación Técnica Completa](./docs/TECH-DOCUMENTATION.md) — arquitectura, stack, flujos de datos, modelo de dominio
+- [Índice de Documentación](./docs/README.md)
+- [Quick Start de Upload Manual](./QUICK_START.md)
+- [Especificación de Upload Feature](./docs/package-upload-feature-spec.md)
+- [Guía de Uso de Upload](./docs/upload-feature-usage.md)
+- [Sistema de Ingestión](./docs/ingest-system.md)
 - [Reglas del Proyecto](./AGENTS.md)
+
+### 📊 Métricas
+- [Métricas del Proyecto](./metrics/METRICAS_TECH_RADAR.md) — Análisis detallado
+- [Dashboard Visual](./metrics/DASHBOARD_METRICAS.md) — Gráficos y visualizaciones
 
 ## 🔧 Tecnologías
 
@@ -193,18 +204,18 @@ Para agregar nuevas categorizaciones, edita `src/core/config/categorization-map.
 
 ## 📝 Ejemplo de Uso
 
-Un archivo de ejemplo está incluido en [`documentation/example-package.json`](./documentation/example-package.json) para pruebas:
+Un archivo de ejemplo está incluido en [`example-package.json`](./example-package.json) para pruebas:
 
 ```bash
 # Navega a http://localhost:3000/upload
-# Sube documentation/example-package.json
+# Sube example-package.json
 # Nombre del producto: example-app
 # ¡Explora las dependencias en el radar!
 ```
 
 ## 🐛 Solución de Problemas
 
-Ver [guía de solución de problemas](./documentation/upload-feature-usage.md#-solución-de-problemas).
+Ver [guía de solución de problemas](./docs/upload-feature-usage.md#-solución-de-problemas).
 
 ## 📄 Licencia
 
